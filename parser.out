@@ -1,0 +1,4409 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> start
+Rule 1     start -> function_defs main
+Rule 2     function_defs -> function_def
+Rule 3     function_defs -> function_defs function_def
+Rule 4     main -> VOID MAIN ( ) { program }
+Rule 5     function_def -> FUNC ID ( list ) { program }
+Rule 6     program -> stmt
+Rule 7     program -> program stmt
+Rule 8     stmt -> expr ;
+Rule 9     stmt -> RETURN expr ;
+Rule 10    stmt -> STOP ;
+Rule 11    stmt -> SKIP ;
+Rule 12    stmt -> ;
+Rule 13    stmt -> { }
+Rule 14    stmt_list -> stmt
+Rule 15    stmt_list -> stmt_list stmt
+Rule 16    stmt -> { stmt_list }
+Rule 17    stmt -> OUT list ;
+Rule 18    expr -> INTNUM
+Rule 19    expr -> FLOATNUM
+Rule 20    expr -> STR
+Rule 21    expr -> expr ADD expr
+Rule 22    expr -> expr SUB expr
+Rule 23    expr -> expr MUL expr
+Rule 24    expr -> expr DIV expr
+Rule 25    expr -> expr MOD expr
+Rule 26    expr -> expr GT expr
+Rule 27    expr -> expr LT expr
+Rule 28    expr -> expr GTE expr
+Rule 29    expr -> expr LTE expr
+Rule 30    expr -> expr EQ expr
+Rule 31    expr -> expr NEQ expr
+Rule 32    expr -> ID ( list )
+Rule 33    expr -> ID ( )
+Rule 34    expr -> lvalue ASSIGN expr
+Rule 35    expr -> lvalue ADD_ASSIGN expr
+Rule 36    expr -> lvalue SUB_ASSIGN expr
+Rule 37    expr -> lvalue MUL_ASSIGN expr
+Rule 38    expr -> lvalue DIV_ASSIGN expr
+Rule 39    expr -> lvalue MOD_ASSIGN expr
+Rule 40    expr -> expr '
+Rule 41    lvalue -> ID
+Rule 42    expr -> SUB expr
+Rule 43    expr -> lvalue
+Rule 44    expr -> ( expr )
+Rule 45    lvalue -> expr [ list ]
+Rule 46    expr -> [ ]
+Rule 47    expr -> [ list ]
+Rule 48    list -> expr
+Rule 49    list -> range
+Rule 50    list -> list , expr
+Rule 51    list -> list , range
+Rule 52    stmt -> IFF ( expr ) stmt
+Rule 53    stmt -> IFF ( expr ) stmt ELSE stmt
+Rule 54    stmt -> UNTIL ( expr ) stmt
+Rule 55    range -> expr : expr
+Rule 56    stmt -> FOR ( ID ASSIGN range ) stmt
+
+Terminals, with rules where they appear
+
+'                    : 40
+(                    : 4 5 32 33 44 52 53 54 56
+)                    : 4 5 32 33 44 52 53 54 56
+,                    : 50 51
+:                    : 55
+;                    : 8 9 10 11 12 17
+ADD                  : 21
+ADD_ASSIGN           : 35
+ASSIGN               : 34 56
+DIV                  : 24
+DIV_ASSIGN           : 38
+ELSE                 : 53
+EQ                   : 30
+FLOATNUM             : 19
+FOR                  : 56
+FUNC                 : 5
+GT                   : 26
+GTE                  : 28
+ID                   : 5 32 33 41 56
+IFF                  : 52 53
+INTNUM               : 18
+LT                   : 27
+LTE                  : 29
+MAIN                 : 4
+MOD                  : 25
+MOD_ASSIGN           : 39
+MUL                  : 23
+MUL_ASSIGN           : 37
+NEQ                  : 31
+OUT                  : 17
+RETURN               : 9
+SKIP                 : 11
+STOP                 : 10
+STR                  : 20
+SUB                  : 22 42
+SUB_ASSIGN           : 36
+UNTIL                : 54
+VOID                 : 4
+[                    : 45 46 47
+]                    : 45 46 47
+error                : 
+{                    : 4 5 13 16
+}                    : 4 5 13 16
+
+Nonterminals, with rules where they appear
+
+expr                 : 8 9 21 21 22 22 23 23 24 24 25 25 26 26 27 27 28 28 29 29 30 30 31 31 34 35 36 37 38 39 40 42 44 45 48 50 52 53 54 55 55
+function_def         : 2 3
+function_defs        : 1 3
+list                 : 5 17 32 45 47 50 51
+lvalue               : 34 35 36 37 38 39 43
+main                 : 1
+program              : 4 5 7
+range                : 49 51 56
+start                : 0
+stmt                 : 6 7 14 15 52 53 53 54 56
+stmt_list            : 15 16
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . start
+    (1) start -> . function_defs main
+    (2) function_defs -> . function_def
+    (3) function_defs -> . function_defs function_def
+    (5) function_def -> . FUNC ID ( list ) { program }
+
+    FUNC            shift and go to state 4
+
+    start                          shift and go to state 1
+    function_defs                  shift and go to state 2
+    function_def                   shift and go to state 3
+
+state 1
+
+    (0) S' -> start .
+
+
+
+state 2
+
+    (1) start -> function_defs . main
+    (3) function_defs -> function_defs . function_def
+    (4) main -> . VOID MAIN ( ) { program }
+    (5) function_def -> . FUNC ID ( list ) { program }
+
+    VOID            shift and go to state 7
+    FUNC            shift and go to state 4
+
+    main                           shift and go to state 5
+    function_def                   shift and go to state 6
+
+state 3
+
+    (2) function_defs -> function_def .
+
+    VOID            reduce using rule 2 (function_defs -> function_def .)
+    FUNC            reduce using rule 2 (function_defs -> function_def .)
+
+
+state 4
+
+    (5) function_def -> FUNC . ID ( list ) { program }
+
+    ID              shift and go to state 8
+
+
+state 5
+
+    (1) start -> function_defs main .
+
+    $end            reduce using rule 1 (start -> function_defs main .)
+
+
+state 6
+
+    (3) function_defs -> function_defs function_def .
+
+    VOID            reduce using rule 3 (function_defs -> function_defs function_def .)
+    FUNC            reduce using rule 3 (function_defs -> function_defs function_def .)
+
+
+state 7
+
+    (4) main -> VOID . MAIN ( ) { program }
+
+    MAIN            shift and go to state 9
+
+
+state 8
+
+    (5) function_def -> FUNC ID . ( list ) { program }
+
+    (               shift and go to state 10
+
+
+state 9
+
+    (4) main -> VOID MAIN . ( ) { program }
+
+    (               shift and go to state 11
+
+
+state 10
+
+    (5) function_def -> FUNC ID ( . list ) { program }
+    (48) list -> . expr
+    (49) list -> . range
+    (50) list -> . list , expr
+    (51) list -> . list , range
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (55) range -> . expr : expr
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    list                           shift and go to state 14
+    expr                           shift and go to state 15
+    range                          shift and go to state 16
+    lvalue                         shift and go to state 21
+
+state 11
+
+    (4) main -> VOID MAIN ( . ) { program }
+
+    )               shift and go to state 23
+
+
+state 12
+
+    (32) expr -> ID . ( list )
+    (33) expr -> ID . ( )
+    (41) lvalue -> ID .
+
+    (               shift and go to state 24
+    ASSIGN          reduce using rule 41 (lvalue -> ID .)
+    ADD_ASSIGN      reduce using rule 41 (lvalue -> ID .)
+    SUB_ASSIGN      reduce using rule 41 (lvalue -> ID .)
+    MUL_ASSIGN      reduce using rule 41 (lvalue -> ID .)
+    DIV_ASSIGN      reduce using rule 41 (lvalue -> ID .)
+    MOD_ASSIGN      reduce using rule 41 (lvalue -> ID .)
+    ADD             reduce using rule 41 (lvalue -> ID .)
+    SUB             reduce using rule 41 (lvalue -> ID .)
+    MUL             reduce using rule 41 (lvalue -> ID .)
+    DIV             reduce using rule 41 (lvalue -> ID .)
+    MOD             reduce using rule 41 (lvalue -> ID .)
+    GT              reduce using rule 41 (lvalue -> ID .)
+    LT              reduce using rule 41 (lvalue -> ID .)
+    GTE             reduce using rule 41 (lvalue -> ID .)
+    LTE             reduce using rule 41 (lvalue -> ID .)
+    EQ              reduce using rule 41 (lvalue -> ID .)
+    NEQ             reduce using rule 41 (lvalue -> ID .)
+    '               reduce using rule 41 (lvalue -> ID .)
+    :               reduce using rule 41 (lvalue -> ID .)
+    [               reduce using rule 41 (lvalue -> ID .)
+    )               reduce using rule 41 (lvalue -> ID .)
+    ,               reduce using rule 41 (lvalue -> ID .)
+    ]               reduce using rule 41 (lvalue -> ID .)
+    ;               reduce using rule 41 (lvalue -> ID .)
+
+
+state 13
+
+    (44) expr -> ( . expr )
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    expr                           shift and go to state 25
+    lvalue                         shift and go to state 21
+
+state 14
+
+    (5) function_def -> FUNC ID ( list . ) { program }
+    (50) list -> list . , expr
+    (51) list -> list . , range
+
+    )               shift and go to state 26
+    ,               shift and go to state 27
+
+
+state 15
+
+    (48) list -> expr .
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (55) range -> expr . : expr
+    (45) lvalue -> expr . [ list ]
+
+    )               reduce using rule 48 (list -> expr .)
+    ,               reduce using rule 48 (list -> expr .)
+    ]               reduce using rule 48 (list -> expr .)
+    ;               reduce using rule 48 (list -> expr .)
+    ADD             shift and go to state 28
+    SUB             shift and go to state 29
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    GT              shift and go to state 33
+    LT              shift and go to state 34
+    GTE             shift and go to state 35
+    LTE             shift and go to state 36
+    EQ              shift and go to state 37
+    NEQ             shift and go to state 38
+    '               shift and go to state 39
+    :               shift and go to state 40
+    [               shift and go to state 41
+
+
+state 16
+
+    (49) list -> range .
+
+    )               reduce using rule 49 (list -> range .)
+    ,               reduce using rule 49 (list -> range .)
+    ]               reduce using rule 49 (list -> range .)
+    ;               reduce using rule 49 (list -> range .)
+
+
+state 17
+
+    (18) expr -> INTNUM .
+
+    ADD             reduce using rule 18 (expr -> INTNUM .)
+    SUB             reduce using rule 18 (expr -> INTNUM .)
+    MUL             reduce using rule 18 (expr -> INTNUM .)
+    DIV             reduce using rule 18 (expr -> INTNUM .)
+    MOD             reduce using rule 18 (expr -> INTNUM .)
+    GT              reduce using rule 18 (expr -> INTNUM .)
+    LT              reduce using rule 18 (expr -> INTNUM .)
+    GTE             reduce using rule 18 (expr -> INTNUM .)
+    LTE             reduce using rule 18 (expr -> INTNUM .)
+    EQ              reduce using rule 18 (expr -> INTNUM .)
+    NEQ             reduce using rule 18 (expr -> INTNUM .)
+    '               reduce using rule 18 (expr -> INTNUM .)
+    :               reduce using rule 18 (expr -> INTNUM .)
+    [               reduce using rule 18 (expr -> INTNUM .)
+    )               reduce using rule 18 (expr -> INTNUM .)
+    ,               reduce using rule 18 (expr -> INTNUM .)
+    ]               reduce using rule 18 (expr -> INTNUM .)
+    ;               reduce using rule 18 (expr -> INTNUM .)
+
+
+state 18
+
+    (19) expr -> FLOATNUM .
+
+    ADD             reduce using rule 19 (expr -> FLOATNUM .)
+    SUB             reduce using rule 19 (expr -> FLOATNUM .)
+    MUL             reduce using rule 19 (expr -> FLOATNUM .)
+    DIV             reduce using rule 19 (expr -> FLOATNUM .)
+    MOD             reduce using rule 19 (expr -> FLOATNUM .)
+    GT              reduce using rule 19 (expr -> FLOATNUM .)
+    LT              reduce using rule 19 (expr -> FLOATNUM .)
+    GTE             reduce using rule 19 (expr -> FLOATNUM .)
+    LTE             reduce using rule 19 (expr -> FLOATNUM .)
+    EQ              reduce using rule 19 (expr -> FLOATNUM .)
+    NEQ             reduce using rule 19 (expr -> FLOATNUM .)
+    '               reduce using rule 19 (expr -> FLOATNUM .)
+    :               reduce using rule 19 (expr -> FLOATNUM .)
+    [               reduce using rule 19 (expr -> FLOATNUM .)
+    )               reduce using rule 19 (expr -> FLOATNUM .)
+    ,               reduce using rule 19 (expr -> FLOATNUM .)
+    ]               reduce using rule 19 (expr -> FLOATNUM .)
+    ;               reduce using rule 19 (expr -> FLOATNUM .)
+
+
+state 19
+
+    (20) expr -> STR .
+
+    ADD             reduce using rule 20 (expr -> STR .)
+    SUB             reduce using rule 20 (expr -> STR .)
+    MUL             reduce using rule 20 (expr -> STR .)
+    DIV             reduce using rule 20 (expr -> STR .)
+    MOD             reduce using rule 20 (expr -> STR .)
+    GT              reduce using rule 20 (expr -> STR .)
+    LT              reduce using rule 20 (expr -> STR .)
+    GTE             reduce using rule 20 (expr -> STR .)
+    LTE             reduce using rule 20 (expr -> STR .)
+    EQ              reduce using rule 20 (expr -> STR .)
+    NEQ             reduce using rule 20 (expr -> STR .)
+    '               reduce using rule 20 (expr -> STR .)
+    :               reduce using rule 20 (expr -> STR .)
+    [               reduce using rule 20 (expr -> STR .)
+    )               reduce using rule 20 (expr -> STR .)
+    ,               reduce using rule 20 (expr -> STR .)
+    ]               reduce using rule 20 (expr -> STR .)
+    ;               reduce using rule 20 (expr -> STR .)
+
+
+state 20
+
+    (42) expr -> SUB . expr
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    expr                           shift and go to state 42
+    lvalue                         shift and go to state 21
+
+state 21
+
+    (34) expr -> lvalue . ASSIGN expr
+    (35) expr -> lvalue . ADD_ASSIGN expr
+    (36) expr -> lvalue . SUB_ASSIGN expr
+    (37) expr -> lvalue . MUL_ASSIGN expr
+    (38) expr -> lvalue . DIV_ASSIGN expr
+    (39) expr -> lvalue . MOD_ASSIGN expr
+    (43) expr -> lvalue .
+
+    ASSIGN          shift and go to state 43
+    ADD_ASSIGN      shift and go to state 44
+    SUB_ASSIGN      shift and go to state 45
+    MUL_ASSIGN      shift and go to state 46
+    DIV_ASSIGN      shift and go to state 47
+    MOD_ASSIGN      shift and go to state 48
+    ADD             reduce using rule 43 (expr -> lvalue .)
+    SUB             reduce using rule 43 (expr -> lvalue .)
+    MUL             reduce using rule 43 (expr -> lvalue .)
+    DIV             reduce using rule 43 (expr -> lvalue .)
+    MOD             reduce using rule 43 (expr -> lvalue .)
+    GT              reduce using rule 43 (expr -> lvalue .)
+    LT              reduce using rule 43 (expr -> lvalue .)
+    GTE             reduce using rule 43 (expr -> lvalue .)
+    LTE             reduce using rule 43 (expr -> lvalue .)
+    EQ              reduce using rule 43 (expr -> lvalue .)
+    NEQ             reduce using rule 43 (expr -> lvalue .)
+    '               reduce using rule 43 (expr -> lvalue .)
+    :               reduce using rule 43 (expr -> lvalue .)
+    [               reduce using rule 43 (expr -> lvalue .)
+    )               reduce using rule 43 (expr -> lvalue .)
+    ,               reduce using rule 43 (expr -> lvalue .)
+    ]               reduce using rule 43 (expr -> lvalue .)
+    ;               reduce using rule 43 (expr -> lvalue .)
+
+
+state 22
+
+    (46) expr -> [ . ]
+    (47) expr -> [ . list ]
+    (48) list -> . expr
+    (49) list -> . range
+    (50) list -> . list , expr
+    (51) list -> . list , range
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (55) range -> . expr : expr
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    ]               shift and go to state 49
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    list                           shift and go to state 50
+    expr                           shift and go to state 15
+    range                          shift and go to state 16
+    lvalue                         shift and go to state 21
+
+state 23
+
+    (4) main -> VOID MAIN ( ) . { program }
+
+    {               shift and go to state 51
+
+
+state 24
+
+    (32) expr -> ID ( . list )
+    (33) expr -> ID ( . )
+    (48) list -> . expr
+    (49) list -> . range
+    (50) list -> . list , expr
+    (51) list -> . list , range
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (55) range -> . expr : expr
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    )               shift and go to state 53
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    list                           shift and go to state 52
+    expr                           shift and go to state 15
+    range                          shift and go to state 16
+    lvalue                         shift and go to state 21
+
+state 25
+
+    (44) expr -> ( expr . )
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    )               shift and go to state 54
+    ADD             shift and go to state 28
+    SUB             shift and go to state 29
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    GT              shift and go to state 33
+    LT              shift and go to state 34
+    GTE             shift and go to state 35
+    LTE             shift and go to state 36
+    EQ              shift and go to state 37
+    NEQ             shift and go to state 38
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+
+state 26
+
+    (5) function_def -> FUNC ID ( list ) . { program }
+
+    {               shift and go to state 55
+
+
+state 27
+
+    (50) list -> list , . expr
+    (51) list -> list , . range
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (55) range -> . expr : expr
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    expr                           shift and go to state 56
+    range                          shift and go to state 57
+    lvalue                         shift and go to state 21
+
+state 28
+
+    (21) expr -> expr ADD . expr
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    expr                           shift and go to state 58
+    lvalue                         shift and go to state 21
+
+state 29
+
+    (22) expr -> expr SUB . expr
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    expr                           shift and go to state 59
+    lvalue                         shift and go to state 21
+
+state 30
+
+    (23) expr -> expr MUL . expr
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    expr                           shift and go to state 60
+    lvalue                         shift and go to state 21
+
+state 31
+
+    (24) expr -> expr DIV . expr
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    expr                           shift and go to state 61
+    lvalue                         shift and go to state 21
+
+state 32
+
+    (25) expr -> expr MOD . expr
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    expr                           shift and go to state 62
+    lvalue                         shift and go to state 21
+
+state 33
+
+    (26) expr -> expr GT . expr
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    expr                           shift and go to state 63
+    lvalue                         shift and go to state 21
+
+state 34
+
+    (27) expr -> expr LT . expr
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    expr                           shift and go to state 64
+    lvalue                         shift and go to state 21
+
+state 35
+
+    (28) expr -> expr GTE . expr
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    expr                           shift and go to state 65
+    lvalue                         shift and go to state 21
+
+state 36
+
+    (29) expr -> expr LTE . expr
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    expr                           shift and go to state 66
+    lvalue                         shift and go to state 21
+
+state 37
+
+    (30) expr -> expr EQ . expr
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    expr                           shift and go to state 67
+    lvalue                         shift and go to state 21
+
+state 38
+
+    (31) expr -> expr NEQ . expr
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    expr                           shift and go to state 68
+    lvalue                         shift and go to state 21
+
+state 39
+
+    (40) expr -> expr ' .
+
+    ADD             reduce using rule 40 (expr -> expr ' .)
+    SUB             reduce using rule 40 (expr -> expr ' .)
+    MUL             reduce using rule 40 (expr -> expr ' .)
+    DIV             reduce using rule 40 (expr -> expr ' .)
+    MOD             reduce using rule 40 (expr -> expr ' .)
+    GT              reduce using rule 40 (expr -> expr ' .)
+    LT              reduce using rule 40 (expr -> expr ' .)
+    GTE             reduce using rule 40 (expr -> expr ' .)
+    LTE             reduce using rule 40 (expr -> expr ' .)
+    EQ              reduce using rule 40 (expr -> expr ' .)
+    NEQ             reduce using rule 40 (expr -> expr ' .)
+    '               reduce using rule 40 (expr -> expr ' .)
+    :               reduce using rule 40 (expr -> expr ' .)
+    [               reduce using rule 40 (expr -> expr ' .)
+    )               reduce using rule 40 (expr -> expr ' .)
+    ,               reduce using rule 40 (expr -> expr ' .)
+    ]               reduce using rule 40 (expr -> expr ' .)
+    ;               reduce using rule 40 (expr -> expr ' .)
+
+
+state 40
+
+    (55) range -> expr : . expr
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    expr                           shift and go to state 69
+    lvalue                         shift and go to state 21
+
+state 41
+
+    (45) lvalue -> expr [ . list ]
+    (48) list -> . expr
+    (49) list -> . range
+    (50) list -> . list , expr
+    (51) list -> . list , range
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (55) range -> . expr : expr
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    expr                           shift and go to state 15
+    list                           shift and go to state 70
+    range                          shift and go to state 16
+    lvalue                         shift and go to state 21
+
+state 42
+
+    (42) expr -> SUB expr .
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    ADD             reduce using rule 42 (expr -> SUB expr .)
+    SUB             reduce using rule 42 (expr -> SUB expr .)
+    MUL             reduce using rule 42 (expr -> SUB expr .)
+    DIV             reduce using rule 42 (expr -> SUB expr .)
+    MOD             reduce using rule 42 (expr -> SUB expr .)
+    GT              reduce using rule 42 (expr -> SUB expr .)
+    LT              reduce using rule 42 (expr -> SUB expr .)
+    GTE             reduce using rule 42 (expr -> SUB expr .)
+    LTE             reduce using rule 42 (expr -> SUB expr .)
+    EQ              reduce using rule 42 (expr -> SUB expr .)
+    NEQ             reduce using rule 42 (expr -> SUB expr .)
+    '               reduce using rule 42 (expr -> SUB expr .)
+    :               reduce using rule 42 (expr -> SUB expr .)
+    [               reduce using rule 42 (expr -> SUB expr .)
+    )               reduce using rule 42 (expr -> SUB expr .)
+    ,               reduce using rule 42 (expr -> SUB expr .)
+    ]               reduce using rule 42 (expr -> SUB expr .)
+    ;               reduce using rule 42 (expr -> SUB expr .)
+
+  ! ADD             [ shift and go to state 28 ]
+  ! SUB             [ shift and go to state 29 ]
+  ! MUL             [ shift and go to state 30 ]
+  ! DIV             [ shift and go to state 31 ]
+  ! MOD             [ shift and go to state 32 ]
+  ! GT              [ shift and go to state 33 ]
+  ! LT              [ shift and go to state 34 ]
+  ! GTE             [ shift and go to state 35 ]
+  ! LTE             [ shift and go to state 36 ]
+  ! EQ              [ shift and go to state 37 ]
+  ! NEQ             [ shift and go to state 38 ]
+  ! '               [ shift and go to state 39 ]
+  ! [               [ shift and go to state 41 ]
+
+
+state 43
+
+    (34) expr -> lvalue ASSIGN . expr
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    lvalue                         shift and go to state 21
+    expr                           shift and go to state 71
+
+state 44
+
+    (35) expr -> lvalue ADD_ASSIGN . expr
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    lvalue                         shift and go to state 21
+    expr                           shift and go to state 72
+
+state 45
+
+    (36) expr -> lvalue SUB_ASSIGN . expr
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    lvalue                         shift and go to state 21
+    expr                           shift and go to state 73
+
+state 46
+
+    (37) expr -> lvalue MUL_ASSIGN . expr
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    lvalue                         shift and go to state 21
+    expr                           shift and go to state 74
+
+state 47
+
+    (38) expr -> lvalue DIV_ASSIGN . expr
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    lvalue                         shift and go to state 21
+    expr                           shift and go to state 75
+
+state 48
+
+    (39) expr -> lvalue MOD_ASSIGN . expr
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    lvalue                         shift and go to state 21
+    expr                           shift and go to state 76
+
+state 49
+
+    (46) expr -> [ ] .
+
+    ADD             reduce using rule 46 (expr -> [ ] .)
+    SUB             reduce using rule 46 (expr -> [ ] .)
+    MUL             reduce using rule 46 (expr -> [ ] .)
+    DIV             reduce using rule 46 (expr -> [ ] .)
+    MOD             reduce using rule 46 (expr -> [ ] .)
+    GT              reduce using rule 46 (expr -> [ ] .)
+    LT              reduce using rule 46 (expr -> [ ] .)
+    GTE             reduce using rule 46 (expr -> [ ] .)
+    LTE             reduce using rule 46 (expr -> [ ] .)
+    EQ              reduce using rule 46 (expr -> [ ] .)
+    NEQ             reduce using rule 46 (expr -> [ ] .)
+    '               reduce using rule 46 (expr -> [ ] .)
+    :               reduce using rule 46 (expr -> [ ] .)
+    [               reduce using rule 46 (expr -> [ ] .)
+    )               reduce using rule 46 (expr -> [ ] .)
+    ,               reduce using rule 46 (expr -> [ ] .)
+    ]               reduce using rule 46 (expr -> [ ] .)
+    ;               reduce using rule 46 (expr -> [ ] .)
+
+
+state 50
+
+    (47) expr -> [ list . ]
+    (50) list -> list . , expr
+    (51) list -> list . , range
+
+    ]               shift and go to state 77
+    ,               shift and go to state 27
+
+
+state 51
+
+    (4) main -> VOID MAIN ( ) { . program }
+    (6) program -> . stmt
+    (7) program -> . program stmt
+    (8) stmt -> . expr ;
+    (9) stmt -> . RETURN expr ;
+    (10) stmt -> . STOP ;
+    (11) stmt -> . SKIP ;
+    (12) stmt -> . ;
+    (13) stmt -> . { }
+    (16) stmt -> . { stmt_list }
+    (17) stmt -> . OUT list ;
+    (52) stmt -> . IFF ( expr ) stmt
+    (53) stmt -> . IFF ( expr ) stmt ELSE stmt
+    (54) stmt -> . UNTIL ( expr ) stmt
+    (56) stmt -> . FOR ( ID ASSIGN range ) stmt
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    RETURN          shift and go to state 83
+    STOP            shift and go to state 84
+    SKIP            shift and go to state 85
+    ;               shift and go to state 82
+    {               shift and go to state 78
+    OUT             shift and go to state 86
+    IFF             shift and go to state 87
+    UNTIL           shift and go to state 88
+    FOR             shift and go to state 89
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    program                        shift and go to state 79
+    stmt                           shift and go to state 80
+    expr                           shift and go to state 81
+    lvalue                         shift and go to state 21
+
+state 52
+
+    (32) expr -> ID ( list . )
+    (50) list -> list . , expr
+    (51) list -> list . , range
+
+    )               shift and go to state 90
+    ,               shift and go to state 27
+
+
+state 53
+
+    (33) expr -> ID ( ) .
+
+    ADD             reduce using rule 33 (expr -> ID ( ) .)
+    SUB             reduce using rule 33 (expr -> ID ( ) .)
+    MUL             reduce using rule 33 (expr -> ID ( ) .)
+    DIV             reduce using rule 33 (expr -> ID ( ) .)
+    MOD             reduce using rule 33 (expr -> ID ( ) .)
+    GT              reduce using rule 33 (expr -> ID ( ) .)
+    LT              reduce using rule 33 (expr -> ID ( ) .)
+    GTE             reduce using rule 33 (expr -> ID ( ) .)
+    LTE             reduce using rule 33 (expr -> ID ( ) .)
+    EQ              reduce using rule 33 (expr -> ID ( ) .)
+    NEQ             reduce using rule 33 (expr -> ID ( ) .)
+    '               reduce using rule 33 (expr -> ID ( ) .)
+    :               reduce using rule 33 (expr -> ID ( ) .)
+    [               reduce using rule 33 (expr -> ID ( ) .)
+    )               reduce using rule 33 (expr -> ID ( ) .)
+    ,               reduce using rule 33 (expr -> ID ( ) .)
+    ]               reduce using rule 33 (expr -> ID ( ) .)
+    ;               reduce using rule 33 (expr -> ID ( ) .)
+
+
+state 54
+
+    (44) expr -> ( expr ) .
+
+    ADD             reduce using rule 44 (expr -> ( expr ) .)
+    SUB             reduce using rule 44 (expr -> ( expr ) .)
+    MUL             reduce using rule 44 (expr -> ( expr ) .)
+    DIV             reduce using rule 44 (expr -> ( expr ) .)
+    MOD             reduce using rule 44 (expr -> ( expr ) .)
+    GT              reduce using rule 44 (expr -> ( expr ) .)
+    LT              reduce using rule 44 (expr -> ( expr ) .)
+    GTE             reduce using rule 44 (expr -> ( expr ) .)
+    LTE             reduce using rule 44 (expr -> ( expr ) .)
+    EQ              reduce using rule 44 (expr -> ( expr ) .)
+    NEQ             reduce using rule 44 (expr -> ( expr ) .)
+    '               reduce using rule 44 (expr -> ( expr ) .)
+    :               reduce using rule 44 (expr -> ( expr ) .)
+    [               reduce using rule 44 (expr -> ( expr ) .)
+    )               reduce using rule 44 (expr -> ( expr ) .)
+    ,               reduce using rule 44 (expr -> ( expr ) .)
+    ]               reduce using rule 44 (expr -> ( expr ) .)
+    ;               reduce using rule 44 (expr -> ( expr ) .)
+
+
+state 55
+
+    (5) function_def -> FUNC ID ( list ) { . program }
+    (6) program -> . stmt
+    (7) program -> . program stmt
+    (8) stmt -> . expr ;
+    (9) stmt -> . RETURN expr ;
+    (10) stmt -> . STOP ;
+    (11) stmt -> . SKIP ;
+    (12) stmt -> . ;
+    (13) stmt -> . { }
+    (16) stmt -> . { stmt_list }
+    (17) stmt -> . OUT list ;
+    (52) stmt -> . IFF ( expr ) stmt
+    (53) stmt -> . IFF ( expr ) stmt ELSE stmt
+    (54) stmt -> . UNTIL ( expr ) stmt
+    (56) stmt -> . FOR ( ID ASSIGN range ) stmt
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    RETURN          shift and go to state 83
+    STOP            shift and go to state 84
+    SKIP            shift and go to state 85
+    ;               shift and go to state 82
+    {               shift and go to state 78
+    OUT             shift and go to state 86
+    IFF             shift and go to state 87
+    UNTIL           shift and go to state 88
+    FOR             shift and go to state 89
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    program                        shift and go to state 91
+    stmt                           shift and go to state 80
+    expr                           shift and go to state 81
+    lvalue                         shift and go to state 21
+
+state 56
+
+    (50) list -> list , expr .
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (55) range -> expr . : expr
+    (45) lvalue -> expr . [ list ]
+
+    )               reduce using rule 50 (list -> list , expr .)
+    ,               reduce using rule 50 (list -> list , expr .)
+    ]               reduce using rule 50 (list -> list , expr .)
+    ;               reduce using rule 50 (list -> list , expr .)
+    ADD             shift and go to state 28
+    SUB             shift and go to state 29
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    GT              shift and go to state 33
+    LT              shift and go to state 34
+    GTE             shift and go to state 35
+    LTE             shift and go to state 36
+    EQ              shift and go to state 37
+    NEQ             shift and go to state 38
+    '               shift and go to state 39
+    :               shift and go to state 40
+    [               shift and go to state 41
+
+
+state 57
+
+    (51) list -> list , range .
+
+    )               reduce using rule 51 (list -> list , range .)
+    ,               reduce using rule 51 (list -> list , range .)
+    ]               reduce using rule 51 (list -> list , range .)
+    ;               reduce using rule 51 (list -> list , range .)
+
+
+state 58
+
+    (21) expr -> expr ADD expr .
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    ADD             reduce using rule 21 (expr -> expr ADD expr .)
+    SUB             reduce using rule 21 (expr -> expr ADD expr .)
+    GT              reduce using rule 21 (expr -> expr ADD expr .)
+    LT              reduce using rule 21 (expr -> expr ADD expr .)
+    GTE             reduce using rule 21 (expr -> expr ADD expr .)
+    LTE             reduce using rule 21 (expr -> expr ADD expr .)
+    EQ              reduce using rule 21 (expr -> expr ADD expr .)
+    NEQ             reduce using rule 21 (expr -> expr ADD expr .)
+    :               reduce using rule 21 (expr -> expr ADD expr .)
+    )               reduce using rule 21 (expr -> expr ADD expr .)
+    ,               reduce using rule 21 (expr -> expr ADD expr .)
+    ]               reduce using rule 21 (expr -> expr ADD expr .)
+    ;               reduce using rule 21 (expr -> expr ADD expr .)
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+  ! MUL             [ reduce using rule 21 (expr -> expr ADD expr .) ]
+  ! DIV             [ reduce using rule 21 (expr -> expr ADD expr .) ]
+  ! MOD             [ reduce using rule 21 (expr -> expr ADD expr .) ]
+  ! '               [ reduce using rule 21 (expr -> expr ADD expr .) ]
+  ! [               [ reduce using rule 21 (expr -> expr ADD expr .) ]
+  ! ADD             [ shift and go to state 28 ]
+  ! SUB             [ shift and go to state 29 ]
+  ! GT              [ shift and go to state 33 ]
+  ! LT              [ shift and go to state 34 ]
+  ! GTE             [ shift and go to state 35 ]
+  ! LTE             [ shift and go to state 36 ]
+  ! EQ              [ shift and go to state 37 ]
+  ! NEQ             [ shift and go to state 38 ]
+
+
+state 59
+
+    (22) expr -> expr SUB expr .
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    ADD             reduce using rule 22 (expr -> expr SUB expr .)
+    SUB             reduce using rule 22 (expr -> expr SUB expr .)
+    GT              reduce using rule 22 (expr -> expr SUB expr .)
+    LT              reduce using rule 22 (expr -> expr SUB expr .)
+    GTE             reduce using rule 22 (expr -> expr SUB expr .)
+    LTE             reduce using rule 22 (expr -> expr SUB expr .)
+    EQ              reduce using rule 22 (expr -> expr SUB expr .)
+    NEQ             reduce using rule 22 (expr -> expr SUB expr .)
+    :               reduce using rule 22 (expr -> expr SUB expr .)
+    )               reduce using rule 22 (expr -> expr SUB expr .)
+    ,               reduce using rule 22 (expr -> expr SUB expr .)
+    ]               reduce using rule 22 (expr -> expr SUB expr .)
+    ;               reduce using rule 22 (expr -> expr SUB expr .)
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+  ! MUL             [ reduce using rule 22 (expr -> expr SUB expr .) ]
+  ! DIV             [ reduce using rule 22 (expr -> expr SUB expr .) ]
+  ! MOD             [ reduce using rule 22 (expr -> expr SUB expr .) ]
+  ! '               [ reduce using rule 22 (expr -> expr SUB expr .) ]
+  ! [               [ reduce using rule 22 (expr -> expr SUB expr .) ]
+  ! ADD             [ shift and go to state 28 ]
+  ! SUB             [ shift and go to state 29 ]
+  ! GT              [ shift and go to state 33 ]
+  ! LT              [ shift and go to state 34 ]
+  ! GTE             [ shift and go to state 35 ]
+  ! LTE             [ shift and go to state 36 ]
+  ! EQ              [ shift and go to state 37 ]
+  ! NEQ             [ shift and go to state 38 ]
+
+
+state 60
+
+    (23) expr -> expr MUL expr .
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    ADD             reduce using rule 23 (expr -> expr MUL expr .)
+    SUB             reduce using rule 23 (expr -> expr MUL expr .)
+    MUL             reduce using rule 23 (expr -> expr MUL expr .)
+    DIV             reduce using rule 23 (expr -> expr MUL expr .)
+    MOD             reduce using rule 23 (expr -> expr MUL expr .)
+    GT              reduce using rule 23 (expr -> expr MUL expr .)
+    LT              reduce using rule 23 (expr -> expr MUL expr .)
+    GTE             reduce using rule 23 (expr -> expr MUL expr .)
+    LTE             reduce using rule 23 (expr -> expr MUL expr .)
+    EQ              reduce using rule 23 (expr -> expr MUL expr .)
+    NEQ             reduce using rule 23 (expr -> expr MUL expr .)
+    :               reduce using rule 23 (expr -> expr MUL expr .)
+    )               reduce using rule 23 (expr -> expr MUL expr .)
+    ,               reduce using rule 23 (expr -> expr MUL expr .)
+    ]               reduce using rule 23 (expr -> expr MUL expr .)
+    ;               reduce using rule 23 (expr -> expr MUL expr .)
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+  ! '               [ reduce using rule 23 (expr -> expr MUL expr .) ]
+  ! [               [ reduce using rule 23 (expr -> expr MUL expr .) ]
+  ! ADD             [ shift and go to state 28 ]
+  ! SUB             [ shift and go to state 29 ]
+  ! MUL             [ shift and go to state 30 ]
+  ! DIV             [ shift and go to state 31 ]
+  ! MOD             [ shift and go to state 32 ]
+  ! GT              [ shift and go to state 33 ]
+  ! LT              [ shift and go to state 34 ]
+  ! GTE             [ shift and go to state 35 ]
+  ! LTE             [ shift and go to state 36 ]
+  ! EQ              [ shift and go to state 37 ]
+  ! NEQ             [ shift and go to state 38 ]
+
+
+state 61
+
+    (24) expr -> expr DIV expr .
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    ADD             reduce using rule 24 (expr -> expr DIV expr .)
+    SUB             reduce using rule 24 (expr -> expr DIV expr .)
+    MUL             reduce using rule 24 (expr -> expr DIV expr .)
+    DIV             reduce using rule 24 (expr -> expr DIV expr .)
+    MOD             reduce using rule 24 (expr -> expr DIV expr .)
+    GT              reduce using rule 24 (expr -> expr DIV expr .)
+    LT              reduce using rule 24 (expr -> expr DIV expr .)
+    GTE             reduce using rule 24 (expr -> expr DIV expr .)
+    LTE             reduce using rule 24 (expr -> expr DIV expr .)
+    EQ              reduce using rule 24 (expr -> expr DIV expr .)
+    NEQ             reduce using rule 24 (expr -> expr DIV expr .)
+    :               reduce using rule 24 (expr -> expr DIV expr .)
+    )               reduce using rule 24 (expr -> expr DIV expr .)
+    ,               reduce using rule 24 (expr -> expr DIV expr .)
+    ]               reduce using rule 24 (expr -> expr DIV expr .)
+    ;               reduce using rule 24 (expr -> expr DIV expr .)
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+  ! '               [ reduce using rule 24 (expr -> expr DIV expr .) ]
+  ! [               [ reduce using rule 24 (expr -> expr DIV expr .) ]
+  ! ADD             [ shift and go to state 28 ]
+  ! SUB             [ shift and go to state 29 ]
+  ! MUL             [ shift and go to state 30 ]
+  ! DIV             [ shift and go to state 31 ]
+  ! MOD             [ shift and go to state 32 ]
+  ! GT              [ shift and go to state 33 ]
+  ! LT              [ shift and go to state 34 ]
+  ! GTE             [ shift and go to state 35 ]
+  ! LTE             [ shift and go to state 36 ]
+  ! EQ              [ shift and go to state 37 ]
+  ! NEQ             [ shift and go to state 38 ]
+
+
+state 62
+
+    (25) expr -> expr MOD expr .
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    ADD             reduce using rule 25 (expr -> expr MOD expr .)
+    SUB             reduce using rule 25 (expr -> expr MOD expr .)
+    MUL             reduce using rule 25 (expr -> expr MOD expr .)
+    DIV             reduce using rule 25 (expr -> expr MOD expr .)
+    MOD             reduce using rule 25 (expr -> expr MOD expr .)
+    GT              reduce using rule 25 (expr -> expr MOD expr .)
+    LT              reduce using rule 25 (expr -> expr MOD expr .)
+    GTE             reduce using rule 25 (expr -> expr MOD expr .)
+    LTE             reduce using rule 25 (expr -> expr MOD expr .)
+    EQ              reduce using rule 25 (expr -> expr MOD expr .)
+    NEQ             reduce using rule 25 (expr -> expr MOD expr .)
+    :               reduce using rule 25 (expr -> expr MOD expr .)
+    )               reduce using rule 25 (expr -> expr MOD expr .)
+    ,               reduce using rule 25 (expr -> expr MOD expr .)
+    ]               reduce using rule 25 (expr -> expr MOD expr .)
+    ;               reduce using rule 25 (expr -> expr MOD expr .)
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+  ! '               [ reduce using rule 25 (expr -> expr MOD expr .) ]
+  ! [               [ reduce using rule 25 (expr -> expr MOD expr .) ]
+  ! ADD             [ shift and go to state 28 ]
+  ! SUB             [ shift and go to state 29 ]
+  ! MUL             [ shift and go to state 30 ]
+  ! DIV             [ shift and go to state 31 ]
+  ! MOD             [ shift and go to state 32 ]
+  ! GT              [ shift and go to state 33 ]
+  ! LT              [ shift and go to state 34 ]
+  ! GTE             [ shift and go to state 35 ]
+  ! LTE             [ shift and go to state 36 ]
+  ! EQ              [ shift and go to state 37 ]
+  ! NEQ             [ shift and go to state 38 ]
+
+
+state 63
+
+    (26) expr -> expr GT expr .
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    GT              reduce using rule 26 (expr -> expr GT expr .)
+    LT              reduce using rule 26 (expr -> expr GT expr .)
+    GTE             reduce using rule 26 (expr -> expr GT expr .)
+    LTE             reduce using rule 26 (expr -> expr GT expr .)
+    EQ              reduce using rule 26 (expr -> expr GT expr .)
+    NEQ             reduce using rule 26 (expr -> expr GT expr .)
+    :               reduce using rule 26 (expr -> expr GT expr .)
+    )               reduce using rule 26 (expr -> expr GT expr .)
+    ,               reduce using rule 26 (expr -> expr GT expr .)
+    ]               reduce using rule 26 (expr -> expr GT expr .)
+    ;               reduce using rule 26 (expr -> expr GT expr .)
+    ADD             shift and go to state 28
+    SUB             shift and go to state 29
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+  ! ADD             [ reduce using rule 26 (expr -> expr GT expr .) ]
+  ! SUB             [ reduce using rule 26 (expr -> expr GT expr .) ]
+  ! MUL             [ reduce using rule 26 (expr -> expr GT expr .) ]
+  ! DIV             [ reduce using rule 26 (expr -> expr GT expr .) ]
+  ! MOD             [ reduce using rule 26 (expr -> expr GT expr .) ]
+  ! '               [ reduce using rule 26 (expr -> expr GT expr .) ]
+  ! [               [ reduce using rule 26 (expr -> expr GT expr .) ]
+  ! GT              [ shift and go to state 33 ]
+  ! LT              [ shift and go to state 34 ]
+  ! GTE             [ shift and go to state 35 ]
+  ! LTE             [ shift and go to state 36 ]
+  ! EQ              [ shift and go to state 37 ]
+  ! NEQ             [ shift and go to state 38 ]
+
+
+state 64
+
+    (27) expr -> expr LT expr .
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    GT              reduce using rule 27 (expr -> expr LT expr .)
+    LT              reduce using rule 27 (expr -> expr LT expr .)
+    GTE             reduce using rule 27 (expr -> expr LT expr .)
+    LTE             reduce using rule 27 (expr -> expr LT expr .)
+    EQ              reduce using rule 27 (expr -> expr LT expr .)
+    NEQ             reduce using rule 27 (expr -> expr LT expr .)
+    :               reduce using rule 27 (expr -> expr LT expr .)
+    )               reduce using rule 27 (expr -> expr LT expr .)
+    ,               reduce using rule 27 (expr -> expr LT expr .)
+    ]               reduce using rule 27 (expr -> expr LT expr .)
+    ;               reduce using rule 27 (expr -> expr LT expr .)
+    ADD             shift and go to state 28
+    SUB             shift and go to state 29
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+  ! ADD             [ reduce using rule 27 (expr -> expr LT expr .) ]
+  ! SUB             [ reduce using rule 27 (expr -> expr LT expr .) ]
+  ! MUL             [ reduce using rule 27 (expr -> expr LT expr .) ]
+  ! DIV             [ reduce using rule 27 (expr -> expr LT expr .) ]
+  ! MOD             [ reduce using rule 27 (expr -> expr LT expr .) ]
+  ! '               [ reduce using rule 27 (expr -> expr LT expr .) ]
+  ! [               [ reduce using rule 27 (expr -> expr LT expr .) ]
+  ! GT              [ shift and go to state 33 ]
+  ! LT              [ shift and go to state 34 ]
+  ! GTE             [ shift and go to state 35 ]
+  ! LTE             [ shift and go to state 36 ]
+  ! EQ              [ shift and go to state 37 ]
+  ! NEQ             [ shift and go to state 38 ]
+
+
+state 65
+
+    (28) expr -> expr GTE expr .
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    GT              reduce using rule 28 (expr -> expr GTE expr .)
+    LT              reduce using rule 28 (expr -> expr GTE expr .)
+    GTE             reduce using rule 28 (expr -> expr GTE expr .)
+    LTE             reduce using rule 28 (expr -> expr GTE expr .)
+    EQ              reduce using rule 28 (expr -> expr GTE expr .)
+    NEQ             reduce using rule 28 (expr -> expr GTE expr .)
+    :               reduce using rule 28 (expr -> expr GTE expr .)
+    )               reduce using rule 28 (expr -> expr GTE expr .)
+    ,               reduce using rule 28 (expr -> expr GTE expr .)
+    ]               reduce using rule 28 (expr -> expr GTE expr .)
+    ;               reduce using rule 28 (expr -> expr GTE expr .)
+    ADD             shift and go to state 28
+    SUB             shift and go to state 29
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+  ! ADD             [ reduce using rule 28 (expr -> expr GTE expr .) ]
+  ! SUB             [ reduce using rule 28 (expr -> expr GTE expr .) ]
+  ! MUL             [ reduce using rule 28 (expr -> expr GTE expr .) ]
+  ! DIV             [ reduce using rule 28 (expr -> expr GTE expr .) ]
+  ! MOD             [ reduce using rule 28 (expr -> expr GTE expr .) ]
+  ! '               [ reduce using rule 28 (expr -> expr GTE expr .) ]
+  ! [               [ reduce using rule 28 (expr -> expr GTE expr .) ]
+  ! GT              [ shift and go to state 33 ]
+  ! LT              [ shift and go to state 34 ]
+  ! GTE             [ shift and go to state 35 ]
+  ! LTE             [ shift and go to state 36 ]
+  ! EQ              [ shift and go to state 37 ]
+  ! NEQ             [ shift and go to state 38 ]
+
+
+state 66
+
+    (29) expr -> expr LTE expr .
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    GT              reduce using rule 29 (expr -> expr LTE expr .)
+    LT              reduce using rule 29 (expr -> expr LTE expr .)
+    GTE             reduce using rule 29 (expr -> expr LTE expr .)
+    LTE             reduce using rule 29 (expr -> expr LTE expr .)
+    EQ              reduce using rule 29 (expr -> expr LTE expr .)
+    NEQ             reduce using rule 29 (expr -> expr LTE expr .)
+    :               reduce using rule 29 (expr -> expr LTE expr .)
+    )               reduce using rule 29 (expr -> expr LTE expr .)
+    ,               reduce using rule 29 (expr -> expr LTE expr .)
+    ]               reduce using rule 29 (expr -> expr LTE expr .)
+    ;               reduce using rule 29 (expr -> expr LTE expr .)
+    ADD             shift and go to state 28
+    SUB             shift and go to state 29
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+  ! ADD             [ reduce using rule 29 (expr -> expr LTE expr .) ]
+  ! SUB             [ reduce using rule 29 (expr -> expr LTE expr .) ]
+  ! MUL             [ reduce using rule 29 (expr -> expr LTE expr .) ]
+  ! DIV             [ reduce using rule 29 (expr -> expr LTE expr .) ]
+  ! MOD             [ reduce using rule 29 (expr -> expr LTE expr .) ]
+  ! '               [ reduce using rule 29 (expr -> expr LTE expr .) ]
+  ! [               [ reduce using rule 29 (expr -> expr LTE expr .) ]
+  ! GT              [ shift and go to state 33 ]
+  ! LT              [ shift and go to state 34 ]
+  ! GTE             [ shift and go to state 35 ]
+  ! LTE             [ shift and go to state 36 ]
+  ! EQ              [ shift and go to state 37 ]
+  ! NEQ             [ shift and go to state 38 ]
+
+
+state 67
+
+    (30) expr -> expr EQ expr .
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    GT              reduce using rule 30 (expr -> expr EQ expr .)
+    LT              reduce using rule 30 (expr -> expr EQ expr .)
+    GTE             reduce using rule 30 (expr -> expr EQ expr .)
+    LTE             reduce using rule 30 (expr -> expr EQ expr .)
+    EQ              reduce using rule 30 (expr -> expr EQ expr .)
+    NEQ             reduce using rule 30 (expr -> expr EQ expr .)
+    :               reduce using rule 30 (expr -> expr EQ expr .)
+    )               reduce using rule 30 (expr -> expr EQ expr .)
+    ,               reduce using rule 30 (expr -> expr EQ expr .)
+    ]               reduce using rule 30 (expr -> expr EQ expr .)
+    ;               reduce using rule 30 (expr -> expr EQ expr .)
+    ADD             shift and go to state 28
+    SUB             shift and go to state 29
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+  ! ADD             [ reduce using rule 30 (expr -> expr EQ expr .) ]
+  ! SUB             [ reduce using rule 30 (expr -> expr EQ expr .) ]
+  ! MUL             [ reduce using rule 30 (expr -> expr EQ expr .) ]
+  ! DIV             [ reduce using rule 30 (expr -> expr EQ expr .) ]
+  ! MOD             [ reduce using rule 30 (expr -> expr EQ expr .) ]
+  ! '               [ reduce using rule 30 (expr -> expr EQ expr .) ]
+  ! [               [ reduce using rule 30 (expr -> expr EQ expr .) ]
+  ! GT              [ shift and go to state 33 ]
+  ! LT              [ shift and go to state 34 ]
+  ! GTE             [ shift and go to state 35 ]
+  ! LTE             [ shift and go to state 36 ]
+  ! EQ              [ shift and go to state 37 ]
+  ! NEQ             [ shift and go to state 38 ]
+
+
+state 68
+
+    (31) expr -> expr NEQ expr .
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    GT              reduce using rule 31 (expr -> expr NEQ expr .)
+    LT              reduce using rule 31 (expr -> expr NEQ expr .)
+    GTE             reduce using rule 31 (expr -> expr NEQ expr .)
+    LTE             reduce using rule 31 (expr -> expr NEQ expr .)
+    EQ              reduce using rule 31 (expr -> expr NEQ expr .)
+    NEQ             reduce using rule 31 (expr -> expr NEQ expr .)
+    :               reduce using rule 31 (expr -> expr NEQ expr .)
+    )               reduce using rule 31 (expr -> expr NEQ expr .)
+    ,               reduce using rule 31 (expr -> expr NEQ expr .)
+    ]               reduce using rule 31 (expr -> expr NEQ expr .)
+    ;               reduce using rule 31 (expr -> expr NEQ expr .)
+    ADD             shift and go to state 28
+    SUB             shift and go to state 29
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+  ! ADD             [ reduce using rule 31 (expr -> expr NEQ expr .) ]
+  ! SUB             [ reduce using rule 31 (expr -> expr NEQ expr .) ]
+  ! MUL             [ reduce using rule 31 (expr -> expr NEQ expr .) ]
+  ! DIV             [ reduce using rule 31 (expr -> expr NEQ expr .) ]
+  ! MOD             [ reduce using rule 31 (expr -> expr NEQ expr .) ]
+  ! '               [ reduce using rule 31 (expr -> expr NEQ expr .) ]
+  ! [               [ reduce using rule 31 (expr -> expr NEQ expr .) ]
+  ! GT              [ shift and go to state 33 ]
+  ! LT              [ shift and go to state 34 ]
+  ! GTE             [ shift and go to state 35 ]
+  ! LTE             [ shift and go to state 36 ]
+  ! EQ              [ shift and go to state 37 ]
+  ! NEQ             [ shift and go to state 38 ]
+
+
+state 69
+
+    (55) range -> expr : expr .
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    )               reduce using rule 55 (range -> expr : expr .)
+    ,               reduce using rule 55 (range -> expr : expr .)
+    ]               reduce using rule 55 (range -> expr : expr .)
+    ;               reduce using rule 55 (range -> expr : expr .)
+    ADD             shift and go to state 28
+    SUB             shift and go to state 29
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    GT              shift and go to state 33
+    LT              shift and go to state 34
+    GTE             shift and go to state 35
+    LTE             shift and go to state 36
+    EQ              shift and go to state 37
+    NEQ             shift and go to state 38
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+
+state 70
+
+    (45) lvalue -> expr [ list . ]
+    (50) list -> list . , expr
+    (51) list -> list . , range
+
+    ]               shift and go to state 92
+    ,               shift and go to state 27
+
+
+state 71
+
+    (34) expr -> lvalue ASSIGN expr .
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    :               reduce using rule 34 (expr -> lvalue ASSIGN expr .)
+    )               reduce using rule 34 (expr -> lvalue ASSIGN expr .)
+    ,               reduce using rule 34 (expr -> lvalue ASSIGN expr .)
+    ]               reduce using rule 34 (expr -> lvalue ASSIGN expr .)
+    ;               reduce using rule 34 (expr -> lvalue ASSIGN expr .)
+    ADD             shift and go to state 28
+    SUB             shift and go to state 29
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    GT              shift and go to state 33
+    LT              shift and go to state 34
+    GTE             shift and go to state 35
+    LTE             shift and go to state 36
+    EQ              shift and go to state 37
+    NEQ             shift and go to state 38
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+  ! ADD             [ reduce using rule 34 (expr -> lvalue ASSIGN expr .) ]
+  ! SUB             [ reduce using rule 34 (expr -> lvalue ASSIGN expr .) ]
+  ! MUL             [ reduce using rule 34 (expr -> lvalue ASSIGN expr .) ]
+  ! DIV             [ reduce using rule 34 (expr -> lvalue ASSIGN expr .) ]
+  ! MOD             [ reduce using rule 34 (expr -> lvalue ASSIGN expr .) ]
+  ! GT              [ reduce using rule 34 (expr -> lvalue ASSIGN expr .) ]
+  ! LT              [ reduce using rule 34 (expr -> lvalue ASSIGN expr .) ]
+  ! GTE             [ reduce using rule 34 (expr -> lvalue ASSIGN expr .) ]
+  ! LTE             [ reduce using rule 34 (expr -> lvalue ASSIGN expr .) ]
+  ! EQ              [ reduce using rule 34 (expr -> lvalue ASSIGN expr .) ]
+  ! NEQ             [ reduce using rule 34 (expr -> lvalue ASSIGN expr .) ]
+  ! '               [ reduce using rule 34 (expr -> lvalue ASSIGN expr .) ]
+  ! [               [ reduce using rule 34 (expr -> lvalue ASSIGN expr .) ]
+
+
+state 72
+
+    (35) expr -> lvalue ADD_ASSIGN expr .
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    :               reduce using rule 35 (expr -> lvalue ADD_ASSIGN expr .)
+    )               reduce using rule 35 (expr -> lvalue ADD_ASSIGN expr .)
+    ,               reduce using rule 35 (expr -> lvalue ADD_ASSIGN expr .)
+    ]               reduce using rule 35 (expr -> lvalue ADD_ASSIGN expr .)
+    ;               reduce using rule 35 (expr -> lvalue ADD_ASSIGN expr .)
+    ADD             shift and go to state 28
+    SUB             shift and go to state 29
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    GT              shift and go to state 33
+    LT              shift and go to state 34
+    GTE             shift and go to state 35
+    LTE             shift and go to state 36
+    EQ              shift and go to state 37
+    NEQ             shift and go to state 38
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+  ! ADD             [ reduce using rule 35 (expr -> lvalue ADD_ASSIGN expr .) ]
+  ! SUB             [ reduce using rule 35 (expr -> lvalue ADD_ASSIGN expr .) ]
+  ! MUL             [ reduce using rule 35 (expr -> lvalue ADD_ASSIGN expr .) ]
+  ! DIV             [ reduce using rule 35 (expr -> lvalue ADD_ASSIGN expr .) ]
+  ! MOD             [ reduce using rule 35 (expr -> lvalue ADD_ASSIGN expr .) ]
+  ! GT              [ reduce using rule 35 (expr -> lvalue ADD_ASSIGN expr .) ]
+  ! LT              [ reduce using rule 35 (expr -> lvalue ADD_ASSIGN expr .) ]
+  ! GTE             [ reduce using rule 35 (expr -> lvalue ADD_ASSIGN expr .) ]
+  ! LTE             [ reduce using rule 35 (expr -> lvalue ADD_ASSIGN expr .) ]
+  ! EQ              [ reduce using rule 35 (expr -> lvalue ADD_ASSIGN expr .) ]
+  ! NEQ             [ reduce using rule 35 (expr -> lvalue ADD_ASSIGN expr .) ]
+  ! '               [ reduce using rule 35 (expr -> lvalue ADD_ASSIGN expr .) ]
+  ! [               [ reduce using rule 35 (expr -> lvalue ADD_ASSIGN expr .) ]
+
+
+state 73
+
+    (36) expr -> lvalue SUB_ASSIGN expr .
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    :               reduce using rule 36 (expr -> lvalue SUB_ASSIGN expr .)
+    )               reduce using rule 36 (expr -> lvalue SUB_ASSIGN expr .)
+    ,               reduce using rule 36 (expr -> lvalue SUB_ASSIGN expr .)
+    ]               reduce using rule 36 (expr -> lvalue SUB_ASSIGN expr .)
+    ;               reduce using rule 36 (expr -> lvalue SUB_ASSIGN expr .)
+    ADD             shift and go to state 28
+    SUB             shift and go to state 29
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    GT              shift and go to state 33
+    LT              shift and go to state 34
+    GTE             shift and go to state 35
+    LTE             shift and go to state 36
+    EQ              shift and go to state 37
+    NEQ             shift and go to state 38
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+  ! ADD             [ reduce using rule 36 (expr -> lvalue SUB_ASSIGN expr .) ]
+  ! SUB             [ reduce using rule 36 (expr -> lvalue SUB_ASSIGN expr .) ]
+  ! MUL             [ reduce using rule 36 (expr -> lvalue SUB_ASSIGN expr .) ]
+  ! DIV             [ reduce using rule 36 (expr -> lvalue SUB_ASSIGN expr .) ]
+  ! MOD             [ reduce using rule 36 (expr -> lvalue SUB_ASSIGN expr .) ]
+  ! GT              [ reduce using rule 36 (expr -> lvalue SUB_ASSIGN expr .) ]
+  ! LT              [ reduce using rule 36 (expr -> lvalue SUB_ASSIGN expr .) ]
+  ! GTE             [ reduce using rule 36 (expr -> lvalue SUB_ASSIGN expr .) ]
+  ! LTE             [ reduce using rule 36 (expr -> lvalue SUB_ASSIGN expr .) ]
+  ! EQ              [ reduce using rule 36 (expr -> lvalue SUB_ASSIGN expr .) ]
+  ! NEQ             [ reduce using rule 36 (expr -> lvalue SUB_ASSIGN expr .) ]
+  ! '               [ reduce using rule 36 (expr -> lvalue SUB_ASSIGN expr .) ]
+  ! [               [ reduce using rule 36 (expr -> lvalue SUB_ASSIGN expr .) ]
+
+
+state 74
+
+    (37) expr -> lvalue MUL_ASSIGN expr .
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    :               reduce using rule 37 (expr -> lvalue MUL_ASSIGN expr .)
+    )               reduce using rule 37 (expr -> lvalue MUL_ASSIGN expr .)
+    ,               reduce using rule 37 (expr -> lvalue MUL_ASSIGN expr .)
+    ]               reduce using rule 37 (expr -> lvalue MUL_ASSIGN expr .)
+    ;               reduce using rule 37 (expr -> lvalue MUL_ASSIGN expr .)
+    ADD             shift and go to state 28
+    SUB             shift and go to state 29
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    GT              shift and go to state 33
+    LT              shift and go to state 34
+    GTE             shift and go to state 35
+    LTE             shift and go to state 36
+    EQ              shift and go to state 37
+    NEQ             shift and go to state 38
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+  ! ADD             [ reduce using rule 37 (expr -> lvalue MUL_ASSIGN expr .) ]
+  ! SUB             [ reduce using rule 37 (expr -> lvalue MUL_ASSIGN expr .) ]
+  ! MUL             [ reduce using rule 37 (expr -> lvalue MUL_ASSIGN expr .) ]
+  ! DIV             [ reduce using rule 37 (expr -> lvalue MUL_ASSIGN expr .) ]
+  ! MOD             [ reduce using rule 37 (expr -> lvalue MUL_ASSIGN expr .) ]
+  ! GT              [ reduce using rule 37 (expr -> lvalue MUL_ASSIGN expr .) ]
+  ! LT              [ reduce using rule 37 (expr -> lvalue MUL_ASSIGN expr .) ]
+  ! GTE             [ reduce using rule 37 (expr -> lvalue MUL_ASSIGN expr .) ]
+  ! LTE             [ reduce using rule 37 (expr -> lvalue MUL_ASSIGN expr .) ]
+  ! EQ              [ reduce using rule 37 (expr -> lvalue MUL_ASSIGN expr .) ]
+  ! NEQ             [ reduce using rule 37 (expr -> lvalue MUL_ASSIGN expr .) ]
+  ! '               [ reduce using rule 37 (expr -> lvalue MUL_ASSIGN expr .) ]
+  ! [               [ reduce using rule 37 (expr -> lvalue MUL_ASSIGN expr .) ]
+
+
+state 75
+
+    (38) expr -> lvalue DIV_ASSIGN expr .
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    :               reduce using rule 38 (expr -> lvalue DIV_ASSIGN expr .)
+    )               reduce using rule 38 (expr -> lvalue DIV_ASSIGN expr .)
+    ,               reduce using rule 38 (expr -> lvalue DIV_ASSIGN expr .)
+    ]               reduce using rule 38 (expr -> lvalue DIV_ASSIGN expr .)
+    ;               reduce using rule 38 (expr -> lvalue DIV_ASSIGN expr .)
+    ADD             shift and go to state 28
+    SUB             shift and go to state 29
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    GT              shift and go to state 33
+    LT              shift and go to state 34
+    GTE             shift and go to state 35
+    LTE             shift and go to state 36
+    EQ              shift and go to state 37
+    NEQ             shift and go to state 38
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+  ! ADD             [ reduce using rule 38 (expr -> lvalue DIV_ASSIGN expr .) ]
+  ! SUB             [ reduce using rule 38 (expr -> lvalue DIV_ASSIGN expr .) ]
+  ! MUL             [ reduce using rule 38 (expr -> lvalue DIV_ASSIGN expr .) ]
+  ! DIV             [ reduce using rule 38 (expr -> lvalue DIV_ASSIGN expr .) ]
+  ! MOD             [ reduce using rule 38 (expr -> lvalue DIV_ASSIGN expr .) ]
+  ! GT              [ reduce using rule 38 (expr -> lvalue DIV_ASSIGN expr .) ]
+  ! LT              [ reduce using rule 38 (expr -> lvalue DIV_ASSIGN expr .) ]
+  ! GTE             [ reduce using rule 38 (expr -> lvalue DIV_ASSIGN expr .) ]
+  ! LTE             [ reduce using rule 38 (expr -> lvalue DIV_ASSIGN expr .) ]
+  ! EQ              [ reduce using rule 38 (expr -> lvalue DIV_ASSIGN expr .) ]
+  ! NEQ             [ reduce using rule 38 (expr -> lvalue DIV_ASSIGN expr .) ]
+  ! '               [ reduce using rule 38 (expr -> lvalue DIV_ASSIGN expr .) ]
+  ! [               [ reduce using rule 38 (expr -> lvalue DIV_ASSIGN expr .) ]
+
+
+state 76
+
+    (39) expr -> lvalue MOD_ASSIGN expr .
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+  ! shift/reduce conflict for ADD resolved as shift
+  ! shift/reduce conflict for SUB resolved as shift
+  ! shift/reduce conflict for MUL resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+  ! shift/reduce conflict for GTE resolved as shift
+  ! shift/reduce conflict for LTE resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for NEQ resolved as shift
+  ! shift/reduce conflict for ' resolved as shift
+  ! shift/reduce conflict for [ resolved as shift
+    :               reduce using rule 39 (expr -> lvalue MOD_ASSIGN expr .)
+    )               reduce using rule 39 (expr -> lvalue MOD_ASSIGN expr .)
+    ,               reduce using rule 39 (expr -> lvalue MOD_ASSIGN expr .)
+    ]               reduce using rule 39 (expr -> lvalue MOD_ASSIGN expr .)
+    ;               reduce using rule 39 (expr -> lvalue MOD_ASSIGN expr .)
+    ADD             shift and go to state 28
+    SUB             shift and go to state 29
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    GT              shift and go to state 33
+    LT              shift and go to state 34
+    GTE             shift and go to state 35
+    LTE             shift and go to state 36
+    EQ              shift and go to state 37
+    NEQ             shift and go to state 38
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+  ! ADD             [ reduce using rule 39 (expr -> lvalue MOD_ASSIGN expr .) ]
+  ! SUB             [ reduce using rule 39 (expr -> lvalue MOD_ASSIGN expr .) ]
+  ! MUL             [ reduce using rule 39 (expr -> lvalue MOD_ASSIGN expr .) ]
+  ! DIV             [ reduce using rule 39 (expr -> lvalue MOD_ASSIGN expr .) ]
+  ! MOD             [ reduce using rule 39 (expr -> lvalue MOD_ASSIGN expr .) ]
+  ! GT              [ reduce using rule 39 (expr -> lvalue MOD_ASSIGN expr .) ]
+  ! LT              [ reduce using rule 39 (expr -> lvalue MOD_ASSIGN expr .) ]
+  ! GTE             [ reduce using rule 39 (expr -> lvalue MOD_ASSIGN expr .) ]
+  ! LTE             [ reduce using rule 39 (expr -> lvalue MOD_ASSIGN expr .) ]
+  ! EQ              [ reduce using rule 39 (expr -> lvalue MOD_ASSIGN expr .) ]
+  ! NEQ             [ reduce using rule 39 (expr -> lvalue MOD_ASSIGN expr .) ]
+  ! '               [ reduce using rule 39 (expr -> lvalue MOD_ASSIGN expr .) ]
+  ! [               [ reduce using rule 39 (expr -> lvalue MOD_ASSIGN expr .) ]
+
+
+state 77
+
+    (47) expr -> [ list ] .
+
+    ADD             reduce using rule 47 (expr -> [ list ] .)
+    SUB             reduce using rule 47 (expr -> [ list ] .)
+    MUL             reduce using rule 47 (expr -> [ list ] .)
+    DIV             reduce using rule 47 (expr -> [ list ] .)
+    MOD             reduce using rule 47 (expr -> [ list ] .)
+    GT              reduce using rule 47 (expr -> [ list ] .)
+    LT              reduce using rule 47 (expr -> [ list ] .)
+    GTE             reduce using rule 47 (expr -> [ list ] .)
+    LTE             reduce using rule 47 (expr -> [ list ] .)
+    EQ              reduce using rule 47 (expr -> [ list ] .)
+    NEQ             reduce using rule 47 (expr -> [ list ] .)
+    '               reduce using rule 47 (expr -> [ list ] .)
+    :               reduce using rule 47 (expr -> [ list ] .)
+    [               reduce using rule 47 (expr -> [ list ] .)
+    )               reduce using rule 47 (expr -> [ list ] .)
+    ,               reduce using rule 47 (expr -> [ list ] .)
+    ]               reduce using rule 47 (expr -> [ list ] .)
+    ;               reduce using rule 47 (expr -> [ list ] .)
+
+
+state 78
+
+    (13) stmt -> { . }
+    (16) stmt -> { . stmt_list }
+    (14) stmt_list -> . stmt
+    (15) stmt_list -> . stmt_list stmt
+    (8) stmt -> . expr ;
+    (9) stmt -> . RETURN expr ;
+    (10) stmt -> . STOP ;
+    (11) stmt -> . SKIP ;
+    (12) stmt -> . ;
+    (13) stmt -> . { }
+    (16) stmt -> . { stmt_list }
+    (17) stmt -> . OUT list ;
+    (52) stmt -> . IFF ( expr ) stmt
+    (53) stmt -> . IFF ( expr ) stmt ELSE stmt
+    (54) stmt -> . UNTIL ( expr ) stmt
+    (56) stmt -> . FOR ( ID ASSIGN range ) stmt
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    }               shift and go to state 93
+    RETURN          shift and go to state 83
+    STOP            shift and go to state 84
+    SKIP            shift and go to state 85
+    ;               shift and go to state 82
+    {               shift and go to state 78
+    OUT             shift and go to state 86
+    IFF             shift and go to state 87
+    UNTIL           shift and go to state 88
+    FOR             shift and go to state 89
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    stmt_list                      shift and go to state 94
+    stmt                           shift and go to state 95
+    expr                           shift and go to state 81
+    lvalue                         shift and go to state 21
+
+state 79
+
+    (4) main -> VOID MAIN ( ) { program . }
+    (7) program -> program . stmt
+    (8) stmt -> . expr ;
+    (9) stmt -> . RETURN expr ;
+    (10) stmt -> . STOP ;
+    (11) stmt -> . SKIP ;
+    (12) stmt -> . ;
+    (13) stmt -> . { }
+    (16) stmt -> . { stmt_list }
+    (17) stmt -> . OUT list ;
+    (52) stmt -> . IFF ( expr ) stmt
+    (53) stmt -> . IFF ( expr ) stmt ELSE stmt
+    (54) stmt -> . UNTIL ( expr ) stmt
+    (56) stmt -> . FOR ( ID ASSIGN range ) stmt
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    }               shift and go to state 96
+    RETURN          shift and go to state 83
+    STOP            shift and go to state 84
+    SKIP            shift and go to state 85
+    ;               shift and go to state 82
+    {               shift and go to state 78
+    OUT             shift and go to state 86
+    IFF             shift and go to state 87
+    UNTIL           shift and go to state 88
+    FOR             shift and go to state 89
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    stmt                           shift and go to state 97
+    expr                           shift and go to state 81
+    lvalue                         shift and go to state 21
+
+state 80
+
+    (6) program -> stmt .
+
+    }               reduce using rule 6 (program -> stmt .)
+    RETURN          reduce using rule 6 (program -> stmt .)
+    STOP            reduce using rule 6 (program -> stmt .)
+    SKIP            reduce using rule 6 (program -> stmt .)
+    ;               reduce using rule 6 (program -> stmt .)
+    {               reduce using rule 6 (program -> stmt .)
+    OUT             reduce using rule 6 (program -> stmt .)
+    IFF             reduce using rule 6 (program -> stmt .)
+    UNTIL           reduce using rule 6 (program -> stmt .)
+    FOR             reduce using rule 6 (program -> stmt .)
+    INTNUM          reduce using rule 6 (program -> stmt .)
+    FLOATNUM        reduce using rule 6 (program -> stmt .)
+    STR             reduce using rule 6 (program -> stmt .)
+    ID              reduce using rule 6 (program -> stmt .)
+    SUB             reduce using rule 6 (program -> stmt .)
+    (               reduce using rule 6 (program -> stmt .)
+    [               reduce using rule 6 (program -> stmt .)
+
+
+state 81
+
+    (8) stmt -> expr . ;
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    ;               shift and go to state 98
+    ADD             shift and go to state 28
+    SUB             shift and go to state 29
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    GT              shift and go to state 33
+    LT              shift and go to state 34
+    GTE             shift and go to state 35
+    LTE             shift and go to state 36
+    EQ              shift and go to state 37
+    NEQ             shift and go to state 38
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+
+state 82
+
+    (12) stmt -> ; .
+
+    }               reduce using rule 12 (stmt -> ; .)
+    RETURN          reduce using rule 12 (stmt -> ; .)
+    STOP            reduce using rule 12 (stmt -> ; .)
+    SKIP            reduce using rule 12 (stmt -> ; .)
+    ;               reduce using rule 12 (stmt -> ; .)
+    {               reduce using rule 12 (stmt -> ; .)
+    OUT             reduce using rule 12 (stmt -> ; .)
+    IFF             reduce using rule 12 (stmt -> ; .)
+    UNTIL           reduce using rule 12 (stmt -> ; .)
+    FOR             reduce using rule 12 (stmt -> ; .)
+    INTNUM          reduce using rule 12 (stmt -> ; .)
+    FLOATNUM        reduce using rule 12 (stmt -> ; .)
+    STR             reduce using rule 12 (stmt -> ; .)
+    ID              reduce using rule 12 (stmt -> ; .)
+    SUB             reduce using rule 12 (stmt -> ; .)
+    (               reduce using rule 12 (stmt -> ; .)
+    [               reduce using rule 12 (stmt -> ; .)
+    ELSE            reduce using rule 12 (stmt -> ; .)
+
+
+state 83
+
+    (9) stmt -> RETURN . expr ;
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    expr                           shift and go to state 99
+    lvalue                         shift and go to state 21
+
+state 84
+
+    (10) stmt -> STOP . ;
+
+    ;               shift and go to state 100
+
+
+state 85
+
+    (11) stmt -> SKIP . ;
+
+    ;               shift and go to state 101
+
+
+state 86
+
+    (17) stmt -> OUT . list ;
+    (48) list -> . expr
+    (49) list -> . range
+    (50) list -> . list , expr
+    (51) list -> . list , range
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (55) range -> . expr : expr
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    list                           shift and go to state 102
+    expr                           shift and go to state 15
+    range                          shift and go to state 16
+    lvalue                         shift and go to state 21
+
+state 87
+
+    (52) stmt -> IFF . ( expr ) stmt
+    (53) stmt -> IFF . ( expr ) stmt ELSE stmt
+
+    (               shift and go to state 103
+
+
+state 88
+
+    (54) stmt -> UNTIL . ( expr ) stmt
+
+    (               shift and go to state 104
+
+
+state 89
+
+    (56) stmt -> FOR . ( ID ASSIGN range ) stmt
+
+    (               shift and go to state 105
+
+
+state 90
+
+    (32) expr -> ID ( list ) .
+
+    ADD             reduce using rule 32 (expr -> ID ( list ) .)
+    SUB             reduce using rule 32 (expr -> ID ( list ) .)
+    MUL             reduce using rule 32 (expr -> ID ( list ) .)
+    DIV             reduce using rule 32 (expr -> ID ( list ) .)
+    MOD             reduce using rule 32 (expr -> ID ( list ) .)
+    GT              reduce using rule 32 (expr -> ID ( list ) .)
+    LT              reduce using rule 32 (expr -> ID ( list ) .)
+    GTE             reduce using rule 32 (expr -> ID ( list ) .)
+    LTE             reduce using rule 32 (expr -> ID ( list ) .)
+    EQ              reduce using rule 32 (expr -> ID ( list ) .)
+    NEQ             reduce using rule 32 (expr -> ID ( list ) .)
+    '               reduce using rule 32 (expr -> ID ( list ) .)
+    :               reduce using rule 32 (expr -> ID ( list ) .)
+    [               reduce using rule 32 (expr -> ID ( list ) .)
+    )               reduce using rule 32 (expr -> ID ( list ) .)
+    ,               reduce using rule 32 (expr -> ID ( list ) .)
+    ]               reduce using rule 32 (expr -> ID ( list ) .)
+    ;               reduce using rule 32 (expr -> ID ( list ) .)
+
+
+state 91
+
+    (5) function_def -> FUNC ID ( list ) { program . }
+    (7) program -> program . stmt
+    (8) stmt -> . expr ;
+    (9) stmt -> . RETURN expr ;
+    (10) stmt -> . STOP ;
+    (11) stmt -> . SKIP ;
+    (12) stmt -> . ;
+    (13) stmt -> . { }
+    (16) stmt -> . { stmt_list }
+    (17) stmt -> . OUT list ;
+    (52) stmt -> . IFF ( expr ) stmt
+    (53) stmt -> . IFF ( expr ) stmt ELSE stmt
+    (54) stmt -> . UNTIL ( expr ) stmt
+    (56) stmt -> . FOR ( ID ASSIGN range ) stmt
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    }               shift and go to state 106
+    RETURN          shift and go to state 83
+    STOP            shift and go to state 84
+    SKIP            shift and go to state 85
+    ;               shift and go to state 82
+    {               shift and go to state 78
+    OUT             shift and go to state 86
+    IFF             shift and go to state 87
+    UNTIL           shift and go to state 88
+    FOR             shift and go to state 89
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    stmt                           shift and go to state 97
+    expr                           shift and go to state 81
+    lvalue                         shift and go to state 21
+
+state 92
+
+    (45) lvalue -> expr [ list ] .
+
+    ASSIGN          reduce using rule 45 (lvalue -> expr [ list ] .)
+    ADD_ASSIGN      reduce using rule 45 (lvalue -> expr [ list ] .)
+    SUB_ASSIGN      reduce using rule 45 (lvalue -> expr [ list ] .)
+    MUL_ASSIGN      reduce using rule 45 (lvalue -> expr [ list ] .)
+    DIV_ASSIGN      reduce using rule 45 (lvalue -> expr [ list ] .)
+    MOD_ASSIGN      reduce using rule 45 (lvalue -> expr [ list ] .)
+    ADD             reduce using rule 45 (lvalue -> expr [ list ] .)
+    SUB             reduce using rule 45 (lvalue -> expr [ list ] .)
+    MUL             reduce using rule 45 (lvalue -> expr [ list ] .)
+    DIV             reduce using rule 45 (lvalue -> expr [ list ] .)
+    MOD             reduce using rule 45 (lvalue -> expr [ list ] .)
+    GT              reduce using rule 45 (lvalue -> expr [ list ] .)
+    LT              reduce using rule 45 (lvalue -> expr [ list ] .)
+    GTE             reduce using rule 45 (lvalue -> expr [ list ] .)
+    LTE             reduce using rule 45 (lvalue -> expr [ list ] .)
+    EQ              reduce using rule 45 (lvalue -> expr [ list ] .)
+    NEQ             reduce using rule 45 (lvalue -> expr [ list ] .)
+    '               reduce using rule 45 (lvalue -> expr [ list ] .)
+    :               reduce using rule 45 (lvalue -> expr [ list ] .)
+    [               reduce using rule 45 (lvalue -> expr [ list ] .)
+    )               reduce using rule 45 (lvalue -> expr [ list ] .)
+    ,               reduce using rule 45 (lvalue -> expr [ list ] .)
+    ]               reduce using rule 45 (lvalue -> expr [ list ] .)
+    ;               reduce using rule 45 (lvalue -> expr [ list ] .)
+
+
+state 93
+
+    (13) stmt -> { } .
+
+    }               reduce using rule 13 (stmt -> { } .)
+    RETURN          reduce using rule 13 (stmt -> { } .)
+    STOP            reduce using rule 13 (stmt -> { } .)
+    SKIP            reduce using rule 13 (stmt -> { } .)
+    ;               reduce using rule 13 (stmt -> { } .)
+    {               reduce using rule 13 (stmt -> { } .)
+    OUT             reduce using rule 13 (stmt -> { } .)
+    IFF             reduce using rule 13 (stmt -> { } .)
+    UNTIL           reduce using rule 13 (stmt -> { } .)
+    FOR             reduce using rule 13 (stmt -> { } .)
+    INTNUM          reduce using rule 13 (stmt -> { } .)
+    FLOATNUM        reduce using rule 13 (stmt -> { } .)
+    STR             reduce using rule 13 (stmt -> { } .)
+    ID              reduce using rule 13 (stmt -> { } .)
+    SUB             reduce using rule 13 (stmt -> { } .)
+    (               reduce using rule 13 (stmt -> { } .)
+    [               reduce using rule 13 (stmt -> { } .)
+    ELSE            reduce using rule 13 (stmt -> { } .)
+
+
+state 94
+
+    (16) stmt -> { stmt_list . }
+    (15) stmt_list -> stmt_list . stmt
+    (8) stmt -> . expr ;
+    (9) stmt -> . RETURN expr ;
+    (10) stmt -> . STOP ;
+    (11) stmt -> . SKIP ;
+    (12) stmt -> . ;
+    (13) stmt -> . { }
+    (16) stmt -> . { stmt_list }
+    (17) stmt -> . OUT list ;
+    (52) stmt -> . IFF ( expr ) stmt
+    (53) stmt -> . IFF ( expr ) stmt ELSE stmt
+    (54) stmt -> . UNTIL ( expr ) stmt
+    (56) stmt -> . FOR ( ID ASSIGN range ) stmt
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    }               shift and go to state 107
+    RETURN          shift and go to state 83
+    STOP            shift and go to state 84
+    SKIP            shift and go to state 85
+    ;               shift and go to state 82
+    {               shift and go to state 78
+    OUT             shift and go to state 86
+    IFF             shift and go to state 87
+    UNTIL           shift and go to state 88
+    FOR             shift and go to state 89
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    stmt                           shift and go to state 108
+    expr                           shift and go to state 81
+    lvalue                         shift and go to state 21
+
+state 95
+
+    (14) stmt_list -> stmt .
+
+    }               reduce using rule 14 (stmt_list -> stmt .)
+    RETURN          reduce using rule 14 (stmt_list -> stmt .)
+    STOP            reduce using rule 14 (stmt_list -> stmt .)
+    SKIP            reduce using rule 14 (stmt_list -> stmt .)
+    ;               reduce using rule 14 (stmt_list -> stmt .)
+    {               reduce using rule 14 (stmt_list -> stmt .)
+    OUT             reduce using rule 14 (stmt_list -> stmt .)
+    IFF             reduce using rule 14 (stmt_list -> stmt .)
+    UNTIL           reduce using rule 14 (stmt_list -> stmt .)
+    FOR             reduce using rule 14 (stmt_list -> stmt .)
+    INTNUM          reduce using rule 14 (stmt_list -> stmt .)
+    FLOATNUM        reduce using rule 14 (stmt_list -> stmt .)
+    STR             reduce using rule 14 (stmt_list -> stmt .)
+    ID              reduce using rule 14 (stmt_list -> stmt .)
+    SUB             reduce using rule 14 (stmt_list -> stmt .)
+    (               reduce using rule 14 (stmt_list -> stmt .)
+    [               reduce using rule 14 (stmt_list -> stmt .)
+
+
+state 96
+
+    (4) main -> VOID MAIN ( ) { program } .
+
+    $end            reduce using rule 4 (main -> VOID MAIN ( ) { program } .)
+
+
+state 97
+
+    (7) program -> program stmt .
+
+    }               reduce using rule 7 (program -> program stmt .)
+    RETURN          reduce using rule 7 (program -> program stmt .)
+    STOP            reduce using rule 7 (program -> program stmt .)
+    SKIP            reduce using rule 7 (program -> program stmt .)
+    ;               reduce using rule 7 (program -> program stmt .)
+    {               reduce using rule 7 (program -> program stmt .)
+    OUT             reduce using rule 7 (program -> program stmt .)
+    IFF             reduce using rule 7 (program -> program stmt .)
+    UNTIL           reduce using rule 7 (program -> program stmt .)
+    FOR             reduce using rule 7 (program -> program stmt .)
+    INTNUM          reduce using rule 7 (program -> program stmt .)
+    FLOATNUM        reduce using rule 7 (program -> program stmt .)
+    STR             reduce using rule 7 (program -> program stmt .)
+    ID              reduce using rule 7 (program -> program stmt .)
+    SUB             reduce using rule 7 (program -> program stmt .)
+    (               reduce using rule 7 (program -> program stmt .)
+    [               reduce using rule 7 (program -> program stmt .)
+
+
+state 98
+
+    (8) stmt -> expr ; .
+
+    }               reduce using rule 8 (stmt -> expr ; .)
+    RETURN          reduce using rule 8 (stmt -> expr ; .)
+    STOP            reduce using rule 8 (stmt -> expr ; .)
+    SKIP            reduce using rule 8 (stmt -> expr ; .)
+    ;               reduce using rule 8 (stmt -> expr ; .)
+    {               reduce using rule 8 (stmt -> expr ; .)
+    OUT             reduce using rule 8 (stmt -> expr ; .)
+    IFF             reduce using rule 8 (stmt -> expr ; .)
+    UNTIL           reduce using rule 8 (stmt -> expr ; .)
+    FOR             reduce using rule 8 (stmt -> expr ; .)
+    INTNUM          reduce using rule 8 (stmt -> expr ; .)
+    FLOATNUM        reduce using rule 8 (stmt -> expr ; .)
+    STR             reduce using rule 8 (stmt -> expr ; .)
+    ID              reduce using rule 8 (stmt -> expr ; .)
+    SUB             reduce using rule 8 (stmt -> expr ; .)
+    (               reduce using rule 8 (stmt -> expr ; .)
+    [               reduce using rule 8 (stmt -> expr ; .)
+    ELSE            reduce using rule 8 (stmt -> expr ; .)
+
+
+state 99
+
+    (9) stmt -> RETURN expr . ;
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    ;               shift and go to state 109
+    ADD             shift and go to state 28
+    SUB             shift and go to state 29
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    GT              shift and go to state 33
+    LT              shift and go to state 34
+    GTE             shift and go to state 35
+    LTE             shift and go to state 36
+    EQ              shift and go to state 37
+    NEQ             shift and go to state 38
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+
+state 100
+
+    (10) stmt -> STOP ; .
+
+    }               reduce using rule 10 (stmt -> STOP ; .)
+    RETURN          reduce using rule 10 (stmt -> STOP ; .)
+    STOP            reduce using rule 10 (stmt -> STOP ; .)
+    SKIP            reduce using rule 10 (stmt -> STOP ; .)
+    ;               reduce using rule 10 (stmt -> STOP ; .)
+    {               reduce using rule 10 (stmt -> STOP ; .)
+    OUT             reduce using rule 10 (stmt -> STOP ; .)
+    IFF             reduce using rule 10 (stmt -> STOP ; .)
+    UNTIL           reduce using rule 10 (stmt -> STOP ; .)
+    FOR             reduce using rule 10 (stmt -> STOP ; .)
+    INTNUM          reduce using rule 10 (stmt -> STOP ; .)
+    FLOATNUM        reduce using rule 10 (stmt -> STOP ; .)
+    STR             reduce using rule 10 (stmt -> STOP ; .)
+    ID              reduce using rule 10 (stmt -> STOP ; .)
+    SUB             reduce using rule 10 (stmt -> STOP ; .)
+    (               reduce using rule 10 (stmt -> STOP ; .)
+    [               reduce using rule 10 (stmt -> STOP ; .)
+    ELSE            reduce using rule 10 (stmt -> STOP ; .)
+
+
+state 101
+
+    (11) stmt -> SKIP ; .
+
+    }               reduce using rule 11 (stmt -> SKIP ; .)
+    RETURN          reduce using rule 11 (stmt -> SKIP ; .)
+    STOP            reduce using rule 11 (stmt -> SKIP ; .)
+    SKIP            reduce using rule 11 (stmt -> SKIP ; .)
+    ;               reduce using rule 11 (stmt -> SKIP ; .)
+    {               reduce using rule 11 (stmt -> SKIP ; .)
+    OUT             reduce using rule 11 (stmt -> SKIP ; .)
+    IFF             reduce using rule 11 (stmt -> SKIP ; .)
+    UNTIL           reduce using rule 11 (stmt -> SKIP ; .)
+    FOR             reduce using rule 11 (stmt -> SKIP ; .)
+    INTNUM          reduce using rule 11 (stmt -> SKIP ; .)
+    FLOATNUM        reduce using rule 11 (stmt -> SKIP ; .)
+    STR             reduce using rule 11 (stmt -> SKIP ; .)
+    ID              reduce using rule 11 (stmt -> SKIP ; .)
+    SUB             reduce using rule 11 (stmt -> SKIP ; .)
+    (               reduce using rule 11 (stmt -> SKIP ; .)
+    [               reduce using rule 11 (stmt -> SKIP ; .)
+    ELSE            reduce using rule 11 (stmt -> SKIP ; .)
+
+
+state 102
+
+    (17) stmt -> OUT list . ;
+    (50) list -> list . , expr
+    (51) list -> list . , range
+
+    ;               shift and go to state 110
+    ,               shift and go to state 27
+
+
+state 103
+
+    (52) stmt -> IFF ( . expr ) stmt
+    (53) stmt -> IFF ( . expr ) stmt ELSE stmt
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    expr                           shift and go to state 111
+    lvalue                         shift and go to state 21
+
+state 104
+
+    (54) stmt -> UNTIL ( . expr ) stmt
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    expr                           shift and go to state 112
+    lvalue                         shift and go to state 21
+
+state 105
+
+    (56) stmt -> FOR ( . ID ASSIGN range ) stmt
+
+    ID              shift and go to state 113
+
+
+state 106
+
+    (5) function_def -> FUNC ID ( list ) { program } .
+
+    VOID            reduce using rule 5 (function_def -> FUNC ID ( list ) { program } .)
+    FUNC            reduce using rule 5 (function_def -> FUNC ID ( list ) { program } .)
+
+
+state 107
+
+    (16) stmt -> { stmt_list } .
+
+    }               reduce using rule 16 (stmt -> { stmt_list } .)
+    RETURN          reduce using rule 16 (stmt -> { stmt_list } .)
+    STOP            reduce using rule 16 (stmt -> { stmt_list } .)
+    SKIP            reduce using rule 16 (stmt -> { stmt_list } .)
+    ;               reduce using rule 16 (stmt -> { stmt_list } .)
+    {               reduce using rule 16 (stmt -> { stmt_list } .)
+    OUT             reduce using rule 16 (stmt -> { stmt_list } .)
+    IFF             reduce using rule 16 (stmt -> { stmt_list } .)
+    UNTIL           reduce using rule 16 (stmt -> { stmt_list } .)
+    FOR             reduce using rule 16 (stmt -> { stmt_list } .)
+    INTNUM          reduce using rule 16 (stmt -> { stmt_list } .)
+    FLOATNUM        reduce using rule 16 (stmt -> { stmt_list } .)
+    STR             reduce using rule 16 (stmt -> { stmt_list } .)
+    ID              reduce using rule 16 (stmt -> { stmt_list } .)
+    SUB             reduce using rule 16 (stmt -> { stmt_list } .)
+    (               reduce using rule 16 (stmt -> { stmt_list } .)
+    [               reduce using rule 16 (stmt -> { stmt_list } .)
+    ELSE            reduce using rule 16 (stmt -> { stmt_list } .)
+
+
+state 108
+
+    (15) stmt_list -> stmt_list stmt .
+
+    }               reduce using rule 15 (stmt_list -> stmt_list stmt .)
+    RETURN          reduce using rule 15 (stmt_list -> stmt_list stmt .)
+    STOP            reduce using rule 15 (stmt_list -> stmt_list stmt .)
+    SKIP            reduce using rule 15 (stmt_list -> stmt_list stmt .)
+    ;               reduce using rule 15 (stmt_list -> stmt_list stmt .)
+    {               reduce using rule 15 (stmt_list -> stmt_list stmt .)
+    OUT             reduce using rule 15 (stmt_list -> stmt_list stmt .)
+    IFF             reduce using rule 15 (stmt_list -> stmt_list stmt .)
+    UNTIL           reduce using rule 15 (stmt_list -> stmt_list stmt .)
+    FOR             reduce using rule 15 (stmt_list -> stmt_list stmt .)
+    INTNUM          reduce using rule 15 (stmt_list -> stmt_list stmt .)
+    FLOATNUM        reduce using rule 15 (stmt_list -> stmt_list stmt .)
+    STR             reduce using rule 15 (stmt_list -> stmt_list stmt .)
+    ID              reduce using rule 15 (stmt_list -> stmt_list stmt .)
+    SUB             reduce using rule 15 (stmt_list -> stmt_list stmt .)
+    (               reduce using rule 15 (stmt_list -> stmt_list stmt .)
+    [               reduce using rule 15 (stmt_list -> stmt_list stmt .)
+
+
+state 109
+
+    (9) stmt -> RETURN expr ; .
+
+    }               reduce using rule 9 (stmt -> RETURN expr ; .)
+    RETURN          reduce using rule 9 (stmt -> RETURN expr ; .)
+    STOP            reduce using rule 9 (stmt -> RETURN expr ; .)
+    SKIP            reduce using rule 9 (stmt -> RETURN expr ; .)
+    ;               reduce using rule 9 (stmt -> RETURN expr ; .)
+    {               reduce using rule 9 (stmt -> RETURN expr ; .)
+    OUT             reduce using rule 9 (stmt -> RETURN expr ; .)
+    IFF             reduce using rule 9 (stmt -> RETURN expr ; .)
+    UNTIL           reduce using rule 9 (stmt -> RETURN expr ; .)
+    FOR             reduce using rule 9 (stmt -> RETURN expr ; .)
+    INTNUM          reduce using rule 9 (stmt -> RETURN expr ; .)
+    FLOATNUM        reduce using rule 9 (stmt -> RETURN expr ; .)
+    STR             reduce using rule 9 (stmt -> RETURN expr ; .)
+    ID              reduce using rule 9 (stmt -> RETURN expr ; .)
+    SUB             reduce using rule 9 (stmt -> RETURN expr ; .)
+    (               reduce using rule 9 (stmt -> RETURN expr ; .)
+    [               reduce using rule 9 (stmt -> RETURN expr ; .)
+    ELSE            reduce using rule 9 (stmt -> RETURN expr ; .)
+
+
+state 110
+
+    (17) stmt -> OUT list ; .
+
+    }               reduce using rule 17 (stmt -> OUT list ; .)
+    RETURN          reduce using rule 17 (stmt -> OUT list ; .)
+    STOP            reduce using rule 17 (stmt -> OUT list ; .)
+    SKIP            reduce using rule 17 (stmt -> OUT list ; .)
+    ;               reduce using rule 17 (stmt -> OUT list ; .)
+    {               reduce using rule 17 (stmt -> OUT list ; .)
+    OUT             reduce using rule 17 (stmt -> OUT list ; .)
+    IFF             reduce using rule 17 (stmt -> OUT list ; .)
+    UNTIL           reduce using rule 17 (stmt -> OUT list ; .)
+    FOR             reduce using rule 17 (stmt -> OUT list ; .)
+    INTNUM          reduce using rule 17 (stmt -> OUT list ; .)
+    FLOATNUM        reduce using rule 17 (stmt -> OUT list ; .)
+    STR             reduce using rule 17 (stmt -> OUT list ; .)
+    ID              reduce using rule 17 (stmt -> OUT list ; .)
+    SUB             reduce using rule 17 (stmt -> OUT list ; .)
+    (               reduce using rule 17 (stmt -> OUT list ; .)
+    [               reduce using rule 17 (stmt -> OUT list ; .)
+    ELSE            reduce using rule 17 (stmt -> OUT list ; .)
+
+
+state 111
+
+    (52) stmt -> IFF ( expr . ) stmt
+    (53) stmt -> IFF ( expr . ) stmt ELSE stmt
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    )               shift and go to state 114
+    ADD             shift and go to state 28
+    SUB             shift and go to state 29
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    GT              shift and go to state 33
+    LT              shift and go to state 34
+    GTE             shift and go to state 35
+    LTE             shift and go to state 36
+    EQ              shift and go to state 37
+    NEQ             shift and go to state 38
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+
+state 112
+
+    (54) stmt -> UNTIL ( expr . ) stmt
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    )               shift and go to state 115
+    ADD             shift and go to state 28
+    SUB             shift and go to state 29
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    GT              shift and go to state 33
+    LT              shift and go to state 34
+    GTE             shift and go to state 35
+    LTE             shift and go to state 36
+    EQ              shift and go to state 37
+    NEQ             shift and go to state 38
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+
+state 113
+
+    (56) stmt -> FOR ( ID . ASSIGN range ) stmt
+
+    ASSIGN          shift and go to state 116
+
+
+state 114
+
+    (52) stmt -> IFF ( expr ) . stmt
+    (53) stmt -> IFF ( expr ) . stmt ELSE stmt
+    (8) stmt -> . expr ;
+    (9) stmt -> . RETURN expr ;
+    (10) stmt -> . STOP ;
+    (11) stmt -> . SKIP ;
+    (12) stmt -> . ;
+    (13) stmt -> . { }
+    (16) stmt -> . { stmt_list }
+    (17) stmt -> . OUT list ;
+    (52) stmt -> . IFF ( expr ) stmt
+    (53) stmt -> . IFF ( expr ) stmt ELSE stmt
+    (54) stmt -> . UNTIL ( expr ) stmt
+    (56) stmt -> . FOR ( ID ASSIGN range ) stmt
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    RETURN          shift and go to state 83
+    STOP            shift and go to state 84
+    SKIP            shift and go to state 85
+    ;               shift and go to state 82
+    {               shift and go to state 78
+    OUT             shift and go to state 86
+    IFF             shift and go to state 87
+    UNTIL           shift and go to state 88
+    FOR             shift and go to state 89
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    expr                           shift and go to state 81
+    stmt                           shift and go to state 117
+    lvalue                         shift and go to state 21
+
+state 115
+
+    (54) stmt -> UNTIL ( expr ) . stmt
+    (8) stmt -> . expr ;
+    (9) stmt -> . RETURN expr ;
+    (10) stmt -> . STOP ;
+    (11) stmt -> . SKIP ;
+    (12) stmt -> . ;
+    (13) stmt -> . { }
+    (16) stmt -> . { stmt_list }
+    (17) stmt -> . OUT list ;
+    (52) stmt -> . IFF ( expr ) stmt
+    (53) stmt -> . IFF ( expr ) stmt ELSE stmt
+    (54) stmt -> . UNTIL ( expr ) stmt
+    (56) stmt -> . FOR ( ID ASSIGN range ) stmt
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    RETURN          shift and go to state 83
+    STOP            shift and go to state 84
+    SKIP            shift and go to state 85
+    ;               shift and go to state 82
+    {               shift and go to state 78
+    OUT             shift and go to state 86
+    IFF             shift and go to state 87
+    UNTIL           shift and go to state 88
+    FOR             shift and go to state 89
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    expr                           shift and go to state 81
+    stmt                           shift and go to state 118
+    lvalue                         shift and go to state 21
+
+state 116
+
+    (56) stmt -> FOR ( ID ASSIGN . range ) stmt
+    (55) range -> . expr : expr
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    range                          shift and go to state 119
+    expr                           shift and go to state 120
+    lvalue                         shift and go to state 21
+
+state 117
+
+    (52) stmt -> IFF ( expr ) stmt .
+    (53) stmt -> IFF ( expr ) stmt . ELSE stmt
+
+    }               reduce using rule 52 (stmt -> IFF ( expr ) stmt .)
+    RETURN          reduce using rule 52 (stmt -> IFF ( expr ) stmt .)
+    STOP            reduce using rule 52 (stmt -> IFF ( expr ) stmt .)
+    SKIP            reduce using rule 52 (stmt -> IFF ( expr ) stmt .)
+    ;               reduce using rule 52 (stmt -> IFF ( expr ) stmt .)
+    {               reduce using rule 52 (stmt -> IFF ( expr ) stmt .)
+    OUT             reduce using rule 52 (stmt -> IFF ( expr ) stmt .)
+    IFF             reduce using rule 52 (stmt -> IFF ( expr ) stmt .)
+    UNTIL           reduce using rule 52 (stmt -> IFF ( expr ) stmt .)
+    FOR             reduce using rule 52 (stmt -> IFF ( expr ) stmt .)
+    INTNUM          reduce using rule 52 (stmt -> IFF ( expr ) stmt .)
+    FLOATNUM        reduce using rule 52 (stmt -> IFF ( expr ) stmt .)
+    STR             reduce using rule 52 (stmt -> IFF ( expr ) stmt .)
+    ID              reduce using rule 52 (stmt -> IFF ( expr ) stmt .)
+    SUB             reduce using rule 52 (stmt -> IFF ( expr ) stmt .)
+    (               reduce using rule 52 (stmt -> IFF ( expr ) stmt .)
+    [               reduce using rule 52 (stmt -> IFF ( expr ) stmt .)
+    ELSE            shift and go to state 121
+
+  ! ELSE            [ reduce using rule 52 (stmt -> IFF ( expr ) stmt .) ]
+
+
+state 118
+
+    (54) stmt -> UNTIL ( expr ) stmt .
+
+    }               reduce using rule 54 (stmt -> UNTIL ( expr ) stmt .)
+    RETURN          reduce using rule 54 (stmt -> UNTIL ( expr ) stmt .)
+    STOP            reduce using rule 54 (stmt -> UNTIL ( expr ) stmt .)
+    SKIP            reduce using rule 54 (stmt -> UNTIL ( expr ) stmt .)
+    ;               reduce using rule 54 (stmt -> UNTIL ( expr ) stmt .)
+    {               reduce using rule 54 (stmt -> UNTIL ( expr ) stmt .)
+    OUT             reduce using rule 54 (stmt -> UNTIL ( expr ) stmt .)
+    IFF             reduce using rule 54 (stmt -> UNTIL ( expr ) stmt .)
+    UNTIL           reduce using rule 54 (stmt -> UNTIL ( expr ) stmt .)
+    FOR             reduce using rule 54 (stmt -> UNTIL ( expr ) stmt .)
+    INTNUM          reduce using rule 54 (stmt -> UNTIL ( expr ) stmt .)
+    FLOATNUM        reduce using rule 54 (stmt -> UNTIL ( expr ) stmt .)
+    STR             reduce using rule 54 (stmt -> UNTIL ( expr ) stmt .)
+    ID              reduce using rule 54 (stmt -> UNTIL ( expr ) stmt .)
+    SUB             reduce using rule 54 (stmt -> UNTIL ( expr ) stmt .)
+    (               reduce using rule 54 (stmt -> UNTIL ( expr ) stmt .)
+    [               reduce using rule 54 (stmt -> UNTIL ( expr ) stmt .)
+    ELSE            reduce using rule 54 (stmt -> UNTIL ( expr ) stmt .)
+
+
+state 119
+
+    (56) stmt -> FOR ( ID ASSIGN range . ) stmt
+
+    )               shift and go to state 122
+
+
+state 120
+
+    (55) range -> expr . : expr
+    (21) expr -> expr . ADD expr
+    (22) expr -> expr . SUB expr
+    (23) expr -> expr . MUL expr
+    (24) expr -> expr . DIV expr
+    (25) expr -> expr . MOD expr
+    (26) expr -> expr . GT expr
+    (27) expr -> expr . LT expr
+    (28) expr -> expr . GTE expr
+    (29) expr -> expr . LTE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NEQ expr
+    (40) expr -> expr . '
+    (45) lvalue -> expr . [ list ]
+
+    :               shift and go to state 40
+    ADD             shift and go to state 28
+    SUB             shift and go to state 29
+    MUL             shift and go to state 30
+    DIV             shift and go to state 31
+    MOD             shift and go to state 32
+    GT              shift and go to state 33
+    LT              shift and go to state 34
+    GTE             shift and go to state 35
+    LTE             shift and go to state 36
+    EQ              shift and go to state 37
+    NEQ             shift and go to state 38
+    '               shift and go to state 39
+    [               shift and go to state 41
+
+
+state 121
+
+    (53) stmt -> IFF ( expr ) stmt ELSE . stmt
+    (8) stmt -> . expr ;
+    (9) stmt -> . RETURN expr ;
+    (10) stmt -> . STOP ;
+    (11) stmt -> . SKIP ;
+    (12) stmt -> . ;
+    (13) stmt -> . { }
+    (16) stmt -> . { stmt_list }
+    (17) stmt -> . OUT list ;
+    (52) stmt -> . IFF ( expr ) stmt
+    (53) stmt -> . IFF ( expr ) stmt ELSE stmt
+    (54) stmt -> . UNTIL ( expr ) stmt
+    (56) stmt -> . FOR ( ID ASSIGN range ) stmt
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    RETURN          shift and go to state 83
+    STOP            shift and go to state 84
+    SKIP            shift and go to state 85
+    ;               shift and go to state 82
+    {               shift and go to state 78
+    OUT             shift and go to state 86
+    IFF             shift and go to state 87
+    UNTIL           shift and go to state 88
+    FOR             shift and go to state 89
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    expr                           shift and go to state 81
+    stmt                           shift and go to state 123
+    lvalue                         shift and go to state 21
+
+state 122
+
+    (56) stmt -> FOR ( ID ASSIGN range ) . stmt
+    (8) stmt -> . expr ;
+    (9) stmt -> . RETURN expr ;
+    (10) stmt -> . STOP ;
+    (11) stmt -> . SKIP ;
+    (12) stmt -> . ;
+    (13) stmt -> . { }
+    (16) stmt -> . { stmt_list }
+    (17) stmt -> . OUT list ;
+    (52) stmt -> . IFF ( expr ) stmt
+    (53) stmt -> . IFF ( expr ) stmt ELSE stmt
+    (54) stmt -> . UNTIL ( expr ) stmt
+    (56) stmt -> . FOR ( ID ASSIGN range ) stmt
+    (18) expr -> . INTNUM
+    (19) expr -> . FLOATNUM
+    (20) expr -> . STR
+    (21) expr -> . expr ADD expr
+    (22) expr -> . expr SUB expr
+    (23) expr -> . expr MUL expr
+    (24) expr -> . expr DIV expr
+    (25) expr -> . expr MOD expr
+    (26) expr -> . expr GT expr
+    (27) expr -> . expr LT expr
+    (28) expr -> . expr GTE expr
+    (29) expr -> . expr LTE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NEQ expr
+    (32) expr -> . ID ( list )
+    (33) expr -> . ID ( )
+    (34) expr -> . lvalue ASSIGN expr
+    (35) expr -> . lvalue ADD_ASSIGN expr
+    (36) expr -> . lvalue SUB_ASSIGN expr
+    (37) expr -> . lvalue MUL_ASSIGN expr
+    (38) expr -> . lvalue DIV_ASSIGN expr
+    (39) expr -> . lvalue MOD_ASSIGN expr
+    (40) expr -> . expr '
+    (42) expr -> . SUB expr
+    (43) expr -> . lvalue
+    (44) expr -> . ( expr )
+    (46) expr -> . [ ]
+    (47) expr -> . [ list ]
+    (41) lvalue -> . ID
+    (45) lvalue -> . expr [ list ]
+
+    RETURN          shift and go to state 83
+    STOP            shift and go to state 84
+    SKIP            shift and go to state 85
+    ;               shift and go to state 82
+    {               shift and go to state 78
+    OUT             shift and go to state 86
+    IFF             shift and go to state 87
+    UNTIL           shift and go to state 88
+    FOR             shift and go to state 89
+    INTNUM          shift and go to state 17
+    FLOATNUM        shift and go to state 18
+    STR             shift and go to state 19
+    ID              shift and go to state 12
+    SUB             shift and go to state 20
+    (               shift and go to state 13
+    [               shift and go to state 22
+
+    stmt                           shift and go to state 124
+    expr                           shift and go to state 81
+    lvalue                         shift and go to state 21
+
+state 123
+
+    (53) stmt -> IFF ( expr ) stmt ELSE stmt .
+
+    }               reduce using rule 53 (stmt -> IFF ( expr ) stmt ELSE stmt .)
+    RETURN          reduce using rule 53 (stmt -> IFF ( expr ) stmt ELSE stmt .)
+    STOP            reduce using rule 53 (stmt -> IFF ( expr ) stmt ELSE stmt .)
+    SKIP            reduce using rule 53 (stmt -> IFF ( expr ) stmt ELSE stmt .)
+    ;               reduce using rule 53 (stmt -> IFF ( expr ) stmt ELSE stmt .)
+    {               reduce using rule 53 (stmt -> IFF ( expr ) stmt ELSE stmt .)
+    OUT             reduce using rule 53 (stmt -> IFF ( expr ) stmt ELSE stmt .)
+    IFF             reduce using rule 53 (stmt -> IFF ( expr ) stmt ELSE stmt .)
+    UNTIL           reduce using rule 53 (stmt -> IFF ( expr ) stmt ELSE stmt .)
+    FOR             reduce using rule 53 (stmt -> IFF ( expr ) stmt ELSE stmt .)
+    INTNUM          reduce using rule 53 (stmt -> IFF ( expr ) stmt ELSE stmt .)
+    FLOATNUM        reduce using rule 53 (stmt -> IFF ( expr ) stmt ELSE stmt .)
+    STR             reduce using rule 53 (stmt -> IFF ( expr ) stmt ELSE stmt .)
+    ID              reduce using rule 53 (stmt -> IFF ( expr ) stmt ELSE stmt .)
+    SUB             reduce using rule 53 (stmt -> IFF ( expr ) stmt ELSE stmt .)
+    (               reduce using rule 53 (stmt -> IFF ( expr ) stmt ELSE stmt .)
+    [               reduce using rule 53 (stmt -> IFF ( expr ) stmt ELSE stmt .)
+    ELSE            reduce using rule 53 (stmt -> IFF ( expr ) stmt ELSE stmt .)
+
+
+state 124
+
+    (56) stmt -> FOR ( ID ASSIGN range ) stmt .
+
+    }               reduce using rule 56 (stmt -> FOR ( ID ASSIGN range ) stmt .)
+    RETURN          reduce using rule 56 (stmt -> FOR ( ID ASSIGN range ) stmt .)
+    STOP            reduce using rule 56 (stmt -> FOR ( ID ASSIGN range ) stmt .)
+    SKIP            reduce using rule 56 (stmt -> FOR ( ID ASSIGN range ) stmt .)
+    ;               reduce using rule 56 (stmt -> FOR ( ID ASSIGN range ) stmt .)
+    {               reduce using rule 56 (stmt -> FOR ( ID ASSIGN range ) stmt .)
+    OUT             reduce using rule 56 (stmt -> FOR ( ID ASSIGN range ) stmt .)
+    IFF             reduce using rule 56 (stmt -> FOR ( ID ASSIGN range ) stmt .)
+    UNTIL           reduce using rule 56 (stmt -> FOR ( ID ASSIGN range ) stmt .)
+    FOR             reduce using rule 56 (stmt -> FOR ( ID ASSIGN range ) stmt .)
+    INTNUM          reduce using rule 56 (stmt -> FOR ( ID ASSIGN range ) stmt .)
+    FLOATNUM        reduce using rule 56 (stmt -> FOR ( ID ASSIGN range ) stmt .)
+    STR             reduce using rule 56 (stmt -> FOR ( ID ASSIGN range ) stmt .)
+    ID              reduce using rule 56 (stmt -> FOR ( ID ASSIGN range ) stmt .)
+    SUB             reduce using rule 56 (stmt -> FOR ( ID ASSIGN range ) stmt .)
+    (               reduce using rule 56 (stmt -> FOR ( ID ASSIGN range ) stmt .)
+    [               reduce using rule 56 (stmt -> FOR ( ID ASSIGN range ) stmt .)
+    ELSE            reduce using rule 56 (stmt -> FOR ( ID ASSIGN range ) stmt .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for ADD in state 76 resolved as shift
+WARNING: shift/reduce conflict for SUB in state 76 resolved as shift
+WARNING: shift/reduce conflict for MUL in state 76 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 76 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 76 resolved as shift
+WARNING: shift/reduce conflict for GT in state 76 resolved as shift
+WARNING: shift/reduce conflict for LT in state 76 resolved as shift
+WARNING: shift/reduce conflict for GTE in state 76 resolved as shift
+WARNING: shift/reduce conflict for LTE in state 76 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 76 resolved as shift
+WARNING: shift/reduce conflict for NEQ in state 76 resolved as shift
+WARNING: shift/reduce conflict for ' in state 76 resolved as shift
+WARNING: shift/reduce conflict for [ in state 76 resolved as shift
